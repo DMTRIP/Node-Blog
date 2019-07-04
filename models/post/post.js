@@ -1,4 +1,4 @@
-const { Schema, model } = require("mongoose");
+const { Schema, model } = require('mongoose');
 
 const postSchema = Schema({
   _id: { type: Schema.Types.ObjectId, required: true },
@@ -10,8 +10,8 @@ const postSchema = Schema({
   tags: [String],
   preview: String,
   authorAvatar: String,
-  created: { type: Date, default: Date.now() }
+  created: { type: Date, default: Date.now() },
 });
 
-const Post = model("Post", postSchema);
+const Post = model('Post', postSchema);
 module.exports = Post;

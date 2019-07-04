@@ -1,8 +1,14 @@
 const express = require('express');
 const path = require('path');
+const hbs = require('hbs');
+require('./config/db/db');
+// mongoose post schema
+const Post = require('./models/post/post');
+const postRouts = require('./routes/post');
+
+const userRouts = require('./routes/user');
 
 const app = express();
-const hbs = require('hbs');
 
 hbs.registerHelper('if_st', function(templateAtribut, compareAtreibut, opts) {
   if (templateAtribut === compareAtreibut) {
@@ -17,17 +23,19 @@ const { app: { port } } = require('./config/config');
 app.set('view engine', 'hbs');
 
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/post', postRouts);
+app.use('/user', userRouts);
 
-app.get('/', (req, res) => {
-  res.render('index', {
-    title: 'hbs',
-    // choose style for post 1 == first style etc...
-    poststyle: 1,
-    post: [{
-
-    }],
-  });
-});
+// app.get('/', (req, res) => {
+//   res.render('index', {
+//     title: 'hbs',
+//     // choose style for post 1 == first style etc...
+//     poststyle: 1,
+//     post: [{
+//
+//     }],
+//   });
+// });
 
 app.listen(port, () => {
   console.log(`App is running on port: ${port}`);

@@ -18,7 +18,7 @@ const userSchema = new Schema({
   },
   password: { type: String, required: true, minLength: 8 },
   // type can be user or admin
-  type: { type: String, required: true },
+  type: { type: String, default: 'user' },
   avatar: { type: String },
 
   posts: [{ type: Schema.Types.ObjectId, ref: 'Post' }],

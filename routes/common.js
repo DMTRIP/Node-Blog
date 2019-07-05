@@ -29,6 +29,11 @@ router.get('/registration', (req, res) => {
   res.sendFile(path.join(__dirname, '../', '/public/reg-login-form/signUp.html'));
 });
 
+// get login page
+router.get('/login', (req, res) => {
+  res.sendFile(path.join(__dirname, '../', '/public/reg-login-form/login.html'));
+});
+
 // get single post page
 router.get('/:id', (req, res) => {
   res.send('single post page');

@@ -312,7 +312,7 @@ figure {
 
 .form-group {
   position: relative;
-  margin-bottom: 25px;
+  margin-bottom: .5rem;
   overflow: hidden; }
   .form-group:last-child {
     margin-bottom: 0px; }

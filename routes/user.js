@@ -12,18 +12,21 @@ router.post('/sign-up', (req, res) => {
     _id: new mongoose.Types.ObjectId(),
     //  так как создавать юзера можно не заполняя все параметры
     //  и мы не знаем какие имено тогда вставляем те что приходят
-    ...req.query,
+    ...req.body,
   });
 
   user.save()
     .then((result) => {
-      res.status(201).json({
-        massage: 'Created user successfully',
-        createdUser: {
-          name: result.name,
-          email: result.email,
-        },
-      });
+      // if registration was successful redirect to login page
+      // with query new for visible pop-up that your registration was successful
+      res.redirect('/login?user=new');
+      // res.status(201).json({
+      //   massage: 'Created user successfully',
+      //   createdUser: {
+      //     name: result.name,
+      //     email: result.email,
+      //   },
+      // });
     })
     .catch((err) => {
       console.log(err);
@@ -56,7 +59,6 @@ router.post('/sign-up-re-captcha', (req, res) => {
   // Make Request To VerifyURL
   request(verifyUrl, (err, response, body) => {
     body = JSON.parse(body);
-    console.log(body);
 
     // If Not Successful
     if (body.success !== undefined && !body.success) {

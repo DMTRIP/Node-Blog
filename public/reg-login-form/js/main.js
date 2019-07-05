@@ -4,6 +4,7 @@ window.addEventListener('load', () => {
   const pass = document.querySelector('#pass');
   const rePass = document.querySelector('#rePass');
 
+  // собирает значения валадации инпутов
   const canSubmin = new Map();
   // display validation status for input
   const validDisplay = (res, e, name) => {
@@ -60,46 +61,15 @@ window.addEventListener('load', () => {
       body: JSON.stringify({ captcha }),
     });
     const data = await res.json();
-        // display err text Please complete the Captcha
-        const captchaFailed = document.querySelector('.captcha-failed');
+    // display err text Please complete the Captcha
+    const captchaFailed = document.querySelector('.captcha-failed');
 
-        if (!data.success) {
-          e.preventDefault();
-          captchaFailed.style.visibility = 'visible';
-        } else {
-          captchaFailed.style.visibility = 'hidden';
-        }
-
+    if (!data.success) {
+      e.preventDefault();
+      captchaFailed.style.visibility = 'visible';
+    } else {
+      captchaFailed.style.visibility = 'hidden';
+    }
   });
 
-  // submit.addEventListener('click', (e) => {
-  //   if (canSubmin.size !== 4) e.preventDefault();
-  //
-  //   const captcha = grecaptcha.getResponse();
-  //   console.log(captcha);
-  //   if (captcha.length == 0) {
-  //     e.preventDefault();
-  //   }
-  //
-  //   fetch('/user/sign-up-re-captcha', {
-  //     method: 'POST',
-  //     headers: {
-  //       Accept: 'application/json, text/plain, */*',
-  //       'Content-type': 'application/json',
-  //     },
-  //     body: JSON.stringify({ captcha }),
-  //   })
-  //     .then(res => res.json())
-  //     .then((data) => {
-  //       // display err text Please complete the Captcha
-  //       const captchaFailed = document.querySelector('.captcha-failed');
-  //
-  //       if (!data.success) {
-  //         e.preventDefault();
-  //         captchaFailed.style.visibility = 'visible';
-  //       } else {
-  //         captchaFailed.style.visibility = 'hidden';
-  //       }
-  //     });
-  // });
 });

@@ -1,11 +1,12 @@
 const express = require('express');
 const path = require('path');
+const passport = require('passport');
 
 const router = express.Router();
 
 // get home page
 router.get('/', (req, res) => {
-  res.send('home page');
+  res.send('<h1>Home page</h1>');
 });
 
 // get blog page
@@ -37,6 +38,26 @@ router.get('/login', (req, res) => {
 // get single post page
 router.get('/:id', (req, res) => {
   res.send('single post page');
+});
+
+
+// check user login info
+router.post('/login', (req, res, next) => {
+  passport.authenticate('local', (err, user) => {
+    if (err) {
+      return next(err);
+    }
+
+    if (!user) {
+      return res.redirect('/login');
+    }
+    req.logIn(user, (err) => {
+      if (err) {
+        return next(err);
+      }
+      return res.redirect('/home');
+    });
+  })(req, res, next);
 });
 
 

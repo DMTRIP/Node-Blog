@@ -71,10 +71,13 @@ router.post('/sign-up-re-captcha', (req, res) => {
 });
 
 
-// Log in user
-router.post('/login', (req, res) => {
-  res.send('login user');
+router.get('/bla', (req, res) => {
+  res.send('bla page');
 });
+// Log in user
+// router.post('/login', (req, res) => {
+//   res.send('login user');
+// });
 
 
 module.exports = router;

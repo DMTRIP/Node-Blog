@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path');
 
 const router = express.Router();
 
@@ -12,10 +13,6 @@ router.get('/blog', (req, res) => {
   res.send('blog page');
 });
 
-// get single post page
-router.get('/:id', (req, res) => {
-  res.send('single post page');
-});
 
 // get about page
 router.get('/about', (req, res) => {
@@ -29,7 +26,13 @@ router.get('/contact', (req, res) => {
 
 // get sign up page
 router.get('/registration', (req, res) => {
-  res.sendFile('signUp.html');
+  res.sendFile(path.join(__dirname, '../', '/public/reg-login-form/signUp.html'));
 });
+
+// get single post page
+router.get('/:id', (req, res) => {
+  res.send('single post page');
+});
+
 
 module.exports = router;

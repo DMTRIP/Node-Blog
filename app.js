@@ -1,11 +1,12 @@
 const express = require('express');
 const path = require('path');
 const hbs = require('hbs');
+const bodyParser = require('body-parser');
 require('./config/db/db');
 // mongoose post schema
 const Post = require('./models/post/post');
 const postRouts = require('./routes/post');
-
+const publicRouts = require('./routes/common');
 const userRouts = require('./routes/user');
 
 const app = express();
@@ -23,8 +24,14 @@ const { app: { port } } = require('./config/config');
 app.set('view engine', 'hbs');
 
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use('/', publicRouts);
 app.use('/post', postRouts);
 app.use('/user', userRouts);
+
 
 // app.get('/', (req, res) => {
 //   res.render('index', {

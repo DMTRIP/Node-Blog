@@ -137,7 +137,7 @@ input[type=checkbox]:not(old):checked + label > span:before{
 label {
     position: absolute;
     left: 0;
-    top: 50%;
+    top: 27%;
     @include transform(translateY(-50%));
     color: $black-color;
 }
@@ -253,4 +253,12 @@ label.valid {
     margin-right: 20px;
     margin-top: 10px;
 }
-  
+  .input-err{
+      visibility: hidden;
+      //visibility: visible;
+  }
+
+  .captcha-failed {
+      visibility: hidden;
+      color: #D8000C;
+  }

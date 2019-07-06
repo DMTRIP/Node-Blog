@@ -1,12 +1,14 @@
 const express = require('express');
 const path = require('path');
 const passport = require('passport');
+const cookieParser = require('cookie-parser');
 
 const router = express.Router();
 
 // get home page
 router.get('/', (req, res) => {
-  res.send('<h1>Home page</h1>');
+  // res.sendFile(path.join(__dirname, '../', 'post.html'));
+  res.send(req.cookies);
 });
 
 // get blog page
@@ -35,10 +37,10 @@ router.get('/login', (req, res) => {
   res.sendFile(path.join(__dirname, '../', '/public/reg-login-form/login.html'));
 });
 
-// get single post page
-router.get('/:id', (req, res) => {
-  res.send('single post page');
-});
+// // get single post page
+// router.get('/:id', (req, res) => {
+//   res.send('single post page');
+// });
 
 
 // check user login info
@@ -47,15 +49,23 @@ router.post('/login', (req, res, next) => {
     if (err) {
       return next(err);
     }
+    console.log(1);
+    res.cookie('id', user._id);
 
     if (!user) {
-      return res.redirect('/login');
+      return res.send(user);
     }
+
+    console.log(user);
+    // write user id in cookie
+    const maxAge = 60 * 60 * 100 * 1000 * 1000 * 100000000000000;
+    res.cookie('id', user._id, { maxAge: maxAge });
+
     req.logIn(user, (err) => {
       if (err) {
         return next(err);
       }
-      return res.redirect('/home');
+      return res.redirect('/');
     });
   })(req, res, next);
 });

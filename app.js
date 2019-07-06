@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const expressSession = require('express-session');
 const FileStore = require('session-file-store')(expressSession);
 const passport = require('passport');
+const cookieParser = require('cookie-parser');
 
 require('./config/db/db');
 // mongoose schemas
@@ -29,11 +30,14 @@ const { app: { port } } = require('./config/config');
 // view engine setup
 app.set('view engine', 'hbs');
 
-app.use(express.static(path.join(__dirname, 'public')));
+// client views
+app.use(express.static('public'));
+// user, post images
+app.use('/uploads', express.static('uploads'));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-
+app.use(cookieParser());
 // use session
 app.use(
   expressSession({

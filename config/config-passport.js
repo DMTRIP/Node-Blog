@@ -1,5 +1,7 @@
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
+const cookieParser = require('cookie-parser');
+
 // require mongoose user model
 const User = require('../models/user/user');
 
@@ -20,7 +22,6 @@ passport.use(
     console.log('in Strategy');
     User.findOne({ email, password }, (err, result) => {
       if (err) throw err;
-      console.log(`result${result}`);
       if (result === false) {
         return done(null, false);
       }
@@ -28,6 +29,5 @@ passport.use(
     });
   }),
 );
-
 
 

@@ -1,8 +1,10 @@
 const express = require('express');
 const multer = require('multer');
 const mongoose = require('mongoose');
-// mongoose schema for Post
+const cookieParser = require('cookie-parser');
+// mongoose schemas
 const Post = require('../models/post/post');
+const User = require('../models/user/user');
 
 const storage = multer.diskStorage({
   destination(req, file, cb) {
@@ -25,10 +27,10 @@ const fileFilter = (req, file, cb) => {
 const upload = multer({
   storage,
   limits: {
-    // access file until 5mb
+    //  file size max 5mb
     fileSize: 1024 * 1024 * 5,
   },
-  fileFilter: fileFilter,
+  fileFilter,
 });
 
 const router = express.Router();
@@ -44,8 +46,26 @@ router.get('/:id', (req, res) => {
 });
 
 // create new post
-router.post('/create', upload.single('postImage'), (req, res) => {
-  res.send('post crate');
+router.post('/create', upload.single('postImage'), async (req, res) => {
+  const { id } = req.body;
+  console.log(id);
+  User.findById(id)
+    .then((doc) => {
+      if (!doc) {
+        return res.status(404).json({ massage: 'user not found' });
+      }
+      const post = new Post({
+        _id: new mongoose.Types.ObjectId(),
+        author: id,
+        preview: req.file.path,
+        ...req.body,
+      });
+      post.save((err, result) => {
+        console.log(result);
+          res.status(201).json({massage: 'post created successfully'});
+      })
+    });
+
 });
 
 // edit post

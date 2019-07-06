@@ -1,4 +1,5 @@
-const { Schema, model } = require('mongoose');
+const { Schema } = require('mongoose');
+const mongoose = require('mongoose');
 
 const postSchema = Schema({
   _id: { type: Schema.Types.ObjectId, required: true },
@@ -8,10 +9,10 @@ const postSchema = Schema({
   description: { type: String, maxLength: 600 },
   // category tags for post
   tags: [String],
-  preview: String,
-  authorAvatar: String,
+  preview: {type: String, default: '/uploads/default-images/postdefault.jpeg'},
+  authorAvatar: {type: String, default: '/uploads/default-images/profiledefault.png'},
   created: { type: Date, default: Date.now() },
 });
 
-const Post = model('Post', postSchema);
+const Post = mongoose.model('Post', postSchema);
 module.exports = Post;

@@ -2,13 +2,18 @@ const express = require('express');
 const path = require('path');
 const passport = require('passport');
 const cookieParser = require('cookie-parser');
+// mongoose schema
+const Post = require('../models/post/post');
 
 const router = express.Router();
 
 // get home page
 router.get('/', (req, res) => {
-  // res.sendFile(path.join(__dirname, '../', 'post.html'));
-  res.send(req.cookies);
+  Post.find()
+    .then((docs) => {
+      console.log(docs);
+      res.render('index', { post: docs.map(e => e) });
+    });
 });
 
 // get blog page
@@ -37,10 +42,22 @@ router.get('/login', (req, res) => {
   res.sendFile(path.join(__dirname, '../', '/public/reg-login-form/login.html'));
 });
 
-// // get single post page
-// router.get('/:id', (req, res) => {
-//   res.send('single post page');
-// });
+// get single post page
+router.get('/single-post/:id', (req, res) => {
+  const { id } = req.params;
+  Post.findById(id)
+    .then((doc) => {
+      if (!doc) {
+        return res.status(404).json({ massage: 'Post not found' });
+      }
+      console.log(doc);
+      const { description } = doc;
+      // dived description on two parts fro blog page
+      const firsDiscripton =  description.slice(0, (description.length / 2));
+      const secondDesription = description.slice((description.length / 2 + 1));
+        res.render('single-post-1', { post: doc,firsDiscripton,secondDesription });
+    });
+});
 
 
 // check user login info
@@ -59,7 +76,7 @@ router.post('/login', (req, res, next) => {
     console.log(user);
     // write user id in cookie
     const maxAge = 60 * 60 * 100 * 1000 * 1000 * 100000000000000;
-    res.cookie('id', user._id, { maxAge: maxAge });
+    res.cookie('id', user._id, { maxAge });
 
     req.logIn(user, (err) => {
       if (err) {

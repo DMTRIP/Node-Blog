@@ -41,24 +41,30 @@ router.get('/', (req, res) => {
 });
 
 // get single post by id
-router.get('/:id', (req, res) => {
-  res.send('single post by id');
-});
+// router.get('/:id', (req, res) => {
+//   res.send('single post by id');
+// });
 
 // create new post
 router.post('/create', upload.single('postImage'), async (req, res) => {
   const { id } = req.body;
+  const previewPath = req.file.path ? req.file.path : '/uploads/default-images/postdefault.jpeg';
   console.log(id);
   User.findById(id)
     .then((doc) => {
       if (!doc) {
         return res.status(404).json({ massage: 'user not found' });
       }
+      // divide tags string by words
+      const tags = req.body.tags.split(' ');
       const post = new Post({
         _id: new mongoose.Types.ObjectId(),
-        author: id,
-        preview: req.file.path,
         ...req.body,
+        author: id,
+        preview: previewPath,
+        authorName: doc.name,
+        tags,
+
       });
       post.save((err, result) => {
         console.log(result);

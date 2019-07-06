@@ -25,6 +25,11 @@ hbs.registerHelper('if_st', function (templateAtribut, compareAtreibut, opts) {
   return opts.inverse(this);
 });
 
+hbs.registerHelper('dataFormat', (value) => {
+  //console.log(value.slice(0,17));
+  return value.slice(0);
+});
+
 const { app: { port } } = require('./config/config');
 
 // view engine setup
@@ -32,8 +37,10 @@ app.set('view engine', 'hbs');
 
 // client views
 app.use(express.static('public'));
+app.use('/single-post', express.static('public'));
 // user, post images
 app.use('/uploads', express.static('uploads'));
+app.use('/single-post', express.static('uploads'));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());

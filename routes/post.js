@@ -48,30 +48,38 @@ router.get('/', (req, res) => {
 // create new post
 router.post('/create', upload.single('postImage'), async (req, res) => {
   const { id } = req.body;
-  const previewPath = req.file.path ? req.file.path : '/uploads/default-images/postdefault.jpeg';
+  // почемуто не предаатся id нужно это выяснить
+  console.log(req.body);
+  // image for post
+  let previewPath;
+  if (req.body.path) {
+    previewPath = req.file.path ? req.file.path : '/uploads/default-images/postdefault.jpeg';
+  } else {
+    previewPath = '/uploads/default-images/postdefault.jpeg';
+  }
   console.log(id);
+
   User.findById(id)
     .then((doc) => {
       if (!doc) {
         return res.status(404).json({ massage: 'user not found' });
       }
       // divide tags string by words
-      const tags = req.body.tags.split(' ');
+      // const tags = req.body.tags.split(' ');
+      console.log(req.body);
       const post = new Post({
         _id: new mongoose.Types.ObjectId(),
         ...req.body,
         author: id,
         preview: previewPath,
         authorName: doc.name,
-        tags,
 
       });
       post.save((err, result) => {
         console.log(result);
-          res.status(201).json({massage: 'post created successfully'});
-      })
+        res.status(201).json({ massage: 'post created successfully' });
+      });
     });
-
 });
 
 // edit post

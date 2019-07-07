@@ -1,0 +1,461 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	<title>{{ title }}</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="UTF-8">
+
+
+	<!-- Font -->
+
+	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+
+
+	<!-- Stylesheets -->
+
+	<link href="bona/css/bootstrap/bootstrap.css" rel="stylesheet">
+
+	<link href="bona/css/ionicons.min.css" rel="stylesheet">
+
+
+	<link href="bona/layout-1/css/styles.css" rel="stylesheet">
+
+	<link href="bona/layout-1/css/responsive.css" rel="stylesheet">
+ <link href="bona/common-css/custom-header-menu.css" rel="stylesheet">
+
+</head>
+<body >
+
+<header>
+ <div class="container-fluid position-relative no-side-padding">
+  <div class="header-menu">
+   <div class="container" style="max-width: 1500px !important;">
+    <a href="#" class="logo"><img src="bona/images/logo.png" alt="Logo Image"></a>
+    <div class="tutorial">
+     <div class="src-area">
+      <form>
+       <button class="src-btn" type="submit"><i class="ion-ios-search-strong"></i></button>
+       <input class="src-input" type="text" placeholder="Type of search">
+      </form>
+     </div>
+     <ul>
+      <li><a href="#">Home</a></li>
+      <li><a href="/">Blog</a></li>
+      <li>Post <i class="fa fa-angle-down"></i>
+       <ul>
+        <li><a href="/create-post">Add post</a></li>
+        <li><a href="/my-posts">My posts </a></li>
+        <li><a href="/post-on-approve">Post on approve</a></li>
+       </ul>
+      </li>
+      <li>Tutorials <i class="fa fa-angle-down"></i>
+       <ul>
+        <li>CSS <span>12 Available</span></li>
+        <li>HTML <span>9 Available</span></li>
+        <li>Jade<span>3 Available</span></li>
+        <li>Javascript<span>21 Available</span></li>
+        <li>Design<span>37 Available</span></li>
+       </ul>
+      </li>
+      <li>Contact</li>
+     </ul>
+     <div class="slider"></div><!-- slider -->
+
+
+
+    </div>
+
+    <div class="menu-nav-icon" data-nav-menu="#main-menu"><i class="ion-navicon"></i></div>
+
+    <ul class="main-menu visible-on-click" id="main-menu">
+
+    </ul><!-- main-menu -->
+
+   </div>
+  </div>
+
+
+ </div><!-- conatiner -->
+</header>
+
+
+
+	<section class="blog-area section">
+		<div class="container">
+			<div class="row">
+             {{#each post}}
+              <div class="col-lg-4 col-md-6">
+                      <div class="card h-100">
+                       <div class="single-post post-style-1">
+
+                        <div class="blog-image"><img src="{{preview}}" alt="Blog Image"></div>
+
+                        <a class="avatar" href="#"><img src="{{authorAvatar}}" alt="Profile Image"></a>
+
+                        <div class="blog-info">
+
+                         <h4 class="title"><a href="single-post/{{id}}"><b>{{title}}</b></a></h4>
+
+                         <ul class="post-footer">
+                          <li><a href="#"><i class="ion-heart"></i>57</a></li>
+                          <li><a href="#"><i class="ion-chatbubble"></i>6</a></li>
+                          <li><a href="#"><i class="ion-eye"></i>138</a></li>
+                         </ul>
+
+                        </div><!-- blog-info -->
+                       </div><!-- single-post -->
+                      </div><!-- card -->
+                     </div><!-- col-lg-4 col-md-6 -->
+             {{else}}
+              <h1>no post was found</h1>
+             {{/each}}
+				<!--<div class="col-lg-4 col-md-6">-->
+					<!--<div class="card h-100">-->
+						<!--<div class="single-post post-style-1">-->
+
+							<!--<div class="blog-image"><img src="bona/images/audrey-jackson-260657.jpg" alt="Blog Image"></div>-->
+
+							<!--<a class="avatar" href="#"><img src="bona/images/icons8-team-355979.jpg" alt="Profile Image"></a>-->
+
+							<!--<div class="blog-info">-->
+								<!--<h4 class="title"><a href="#"><b>How Did Van Gogh's Turbulent Mind Depict One of the Most Complex-->
+									<!--Concepts in Physics?</b></a></h4>-->
+
+								<!--<ul class="post-footer">-->
+									<!--<li><a href="#"><i class="ion-heart"></i>57</a></li>-->
+									<!--<li><a href="#"><i class="ion-chatbubble"></i>6</a></li>-->
+									<!--<li><a href="#"><i class="ion-eye"></i>138</a></li>-->
+								<!--</ul>-->
+							<!--</div>&lt;!&ndash; blog-info &ndash;&gt;-->
+
+						<!--</div>&lt;!&ndash; single-post &ndash;&gt;-->
+
+					<!--</div>&lt;!&ndash; card &ndash;&gt;-->
+				<!--</div>&lt;!&ndash; col-lg-4 col-md-6 &ndash;&gt;-->
+
+				<!--<div class="col-lg-4 col-md-6">-->
+					<!--<div class="card h-100">-->
+						<!--<div class="single-post post-style-1">-->
+
+							<!--<div class="blog-image"><img src="bona/images/pexels-photo-370474.jpeg" alt="Blog Image"></div>-->
+
+							<!--<a class="avatar" href="#"><img src="bona/images/averie-woodard-319832.jpg" alt="Profile Image"></a>-->
+
+							<!--<h4 class="title"><a href="#"><b>How Did Van Gogh's Turbulent Mind Depict One of the Most Complex-->
+								<!--Concepts in Physics?</b></a></h4>-->
+
+							<!--<ul class="post-footer">-->
+								<!--<li><a href="#"><i class="ion-heart"></i>57</a></li>-->
+								<!--<li><a href="#"><i class="ion-chatbubble"></i>6</a></li>-->
+								<!--<li><a href="#"><i class="ion-eye"></i>138</a></li>-->
+							<!--</ul>-->
+
+						<!--</div>&lt;!&ndash; single-post &ndash;&gt;-->
+					<!--</div>&lt;!&ndash; card &ndash;&gt;-->
+				<!--</div>&lt;!&ndash; col-lg-4 col-md-6 &ndash;&gt;-->
+
+				<!--<div class="col-lg-8 col-md-12">-->
+					<!--<div class="card h-100">-->
+						<!--<div class="single-post post-style-2">-->
+
+							<!--<div class="blog-image"><img src="bona/images/brooke-lark-194251.jpg" alt="Blog Image"></div>-->
+
+							<!--<div class="blog-info">-->
+
+								<!--<h6 class="pre-title"><a href="#"><b>HEALTH</b></a></h6>-->
+
+								<!--<h4 class="title"><a href="#"><b>How Did Van Gogh's Turbulent Mind Depict One of the Most Complex-->
+									<!--Concepts in Physics?</b></a></h4>-->
+
+								<!--<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt-->
+									<!--ut labore et dolore magna aliqua. Ut enim ad minim veniam</p>-->
+
+								<!--<div class="avatar-area">-->
+									<!--<a class="avatar" href="#"><img src="bona/images/icons8-team-355979.jpg" alt="Profile Image"></a>-->
+									<!--<div class="right-area">-->
+										<!--<a class="name" href="#"><b>Lora Plamer</b></a>-->
+										<!--<h6 class="date" href="#">on Sep 29, 2017 at 9:48am</h6>-->
+									<!--</div>-->
+								<!--</div>-->
+
+								<!--<ul class="post-footer">-->
+									<!--<li><a href="#"><i class="ion-heart"></i>57</a></li>-->
+									<!--<li><a href="#"><i class="ion-chatbubble"></i>6</a></li>-->
+									<!--<li><a href="#"><i class="ion-eye"></i>138</a></li>-->
+								<!--</ul>-->
+
+							<!--</div>&lt;!&ndash; blog-right &ndash;&gt;-->
+
+						<!--</div>&lt;!&ndash; single-post extra-blog &ndash;&gt;-->
+
+					<!--</div>&lt;!&ndash; card &ndash;&gt;-->
+				<!--</div>&lt;!&ndash; col-lg-8 col-md-12 &ndash;&gt;-->
+
+				<!--<div class="col-lg-4 col-md-6">-->
+					<!--<div class="card h-100">-->
+						<!--<div class="single-post post-style-1">-->
+
+							<!--<div class="blog-image"><img src="bona/images/dmitri-popov-326976.jpg" alt="Blog Image"></div>-->
+
+							<!--<a class="avatar" href="#"><img src="bona/images/averie-woodard-319832.jpg" alt="Profile Image"></a>-->
+
+							<!--<h4 class="title"><a href="#"><b>How Did Van Gogh's Turbulent Mind Depict One of the Most Complex-->
+								<!--Concepts in Physics?</b></a></h4>-->
+
+							<!--<ul class="post-footer">-->
+								<!--<li><a href="#"><i class="ion-heart"></i>57</a></li>-->
+								<!--<li><a href="#"><i class="ion-chatbubble"></i>6</a></li>-->
+								<!--<li><a href="#"><i class="ion-eye"></i>138</a></li>-->
+							<!--</ul>-->
+
+						<!--</div>&lt;!&ndash; single-post &ndash;&gt;-->
+					<!--</div>&lt;!&ndash; card &ndash;&gt;-->
+				<!--</div>&lt;!&ndash; col-lg-4 col-md-6 &ndash;&gt;-->
+
+				<!--<div class="col-lg-4 col-md-6">-->
+					<!--<div class="card h-100">-->
+
+						<!--<div class="single-post post-style-2 post-style-3">-->
+
+							<!--<div class="blog-info">-->
+
+								<!--<h6 class="pre-title"><a href="#"><b>HEALTH</b></a></h6>-->
+
+								<!--<h4 class="title"><a href="#"><b>How Did Van Gogh's Turbulent Mind Depict One of the Most Complex-->
+									<!--Concepts in Physics?</b></a></h4>-->
+
+								<!--<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt-->
+									<!--ut labore et dolore magna aliqua. Ut enim ad minim veniam</p>-->
+
+								<!--<div class="avatar-area">-->
+									<!--<a class="avatar" href="#"><img src="bona/images/icons8-team-355979.jpg" alt="Profile Image"></a>-->
+									<!--<div class="right-area">-->
+										<!--<a class="name" href="#"><b>Lora Plamer</b></a>-->
+										<!--<h6 class="date" href="#">on Sep 29, 2017 at 9:48am</h6>-->
+									<!--</div>-->
+								<!--</div>-->
+
+								<!--<ul class="post-footer">-->
+									<!--<li><a href="#"><i class="ion-heart"></i>57</a></li>-->
+									<!--<li><a href="#"><i class="ion-chatbubble"></i>6</a></li>-->
+									<!--<li><a href="#"><i class="ion-eye"></i>138</a></li>-->
+								<!--</ul>-->
+
+							<!--</div>&lt;!&ndash; blog-right &ndash;&gt;-->
+
+						<!--</div>&lt;!&ndash; single-post extra-blog &ndash;&gt;-->
+
+					<!--</div>&lt;!&ndash; card &ndash;&gt;-->
+				<!--</div>&lt;!&ndash; col-lg-4 col-md-6 &ndash;&gt;-->
+
+				<!--<div class="col-lg-4 col-md-6">-->
+					<!--<div class="card h-100">-->
+						<!--<div class="single-post post-style-1">-->
+
+							<!--<div class="blog-image"><img src="bona/images/ben-o-sullivan-382817.jpg" alt="Blog Image"></div>-->
+
+							<!--<a class="avatar" href="#"><img src="bona/images/icons8-team-355979.jpg" alt="Profile Image"></a>-->
+
+							<!--<div class="blog-info">-->
+								<!--<h4 class="title"><a href="#"><b>How Did Van Gogh's Turbulent Mind Depict One of the Most Complex-->
+									<!--Concepts in Physics?</b></a></h4>-->
+
+								<!--<ul class="post-footer">-->
+									<!--<li><a href="#"><i class="ion-heart"></i>57</a></li>-->
+									<!--<li><a href="#"><i class="ion-chatbubble"></i>6</a></li>-->
+									<!--<li><a href="#"><i class="ion-eye"></i>138</a></li>-->
+								<!--</ul>-->
+							<!--</div>&lt;!&ndash; blog-info &ndash;&gt;-->
+
+						<!--</div>&lt;!&ndash; single-post &ndash;&gt;-->
+
+					<!--</div>&lt;!&ndash; card &ndash;&gt;-->
+				<!--</div>&lt;!&ndash; col-lg-4 col-md-6 &ndash;&gt;-->
+
+				<!--<div class="col-lg-4 col-md-6">-->
+					<!--<div class="card h-100">-->
+
+						<!--<div class="single-post post-style-4">-->
+
+							<!--<div class="display-table">-->
+								<!--<h4 class="title display-table-cell"><a href="#"><b>How Did Van Gogh's Turbulent Mind Depict One of the Most Complex-->
+									<!--Concepts in Physics?</b></a></h4>-->
+							<!--</div>-->
+
+							<!--<ul class="post-footer">-->
+								<!--<li><a href="#"><i class="ion-heart"></i>57</a></li>-->
+								<!--<li><a href="#"><i class="ion-chatbubble"></i>6</a></li>-->
+								<!--<li><a href="#"><i class="ion-eye"></i>138</a></li>-->
+							<!--</ul>-->
+
+						<!--</div>&lt;!&ndash; single-post &ndash;&gt;-->
+
+						<!--<div class="single-post">-->
+
+							<!--<div class="display-table">-->
+								<!--<h4 class="title display-table-cell"><a href="#"><b>How Did Van Gogh's Turbulent Mind Depict One of the Most Complex-->
+									<!--Concepts in Physics?</b></a></h4>-->
+							<!--</div>-->
+
+							<!--<ul class="post-footer">-->
+								<!--<li><a href="#"><i class="ion-heart"></i>57</a></li>-->
+								<!--<li><a href="#"><i class="ion-chatbubble"></i>6</a></li>-->
+								<!--<li><a href="#"><i class="ion-eye"></i>138</a></li>-->
+							<!--</ul>-->
+
+						<!--</div>&lt;!&ndash; single-post &ndash;&gt;-->
+
+					<!--</div>&lt;!&ndash; card &ndash;&gt;-->
+				<!--</div>&lt;!&ndash; col-lg-4 col-md-6 &ndash;&gt;-->
+
+				<!--<div class="col-lg-4 col-md-6">-->
+					<!--<div class="card h-100">-->
+
+						<!--<div class="single-post post-style-4">-->
+
+							<!--<div class="display-table">-->
+								<!--<h4 class="title display-table-cell"><a href="#"><b>How Did Van Gogh's Turbulent Mind Depict One of the Most Complex-->
+									<!--Concepts in Physics?</b></a></h4>-->
+							<!--</div>-->
+
+							<!--<ul class="post-footer">-->
+								<!--<li><a href="#"><i class="ion-heart"></i>57</a></li>-->
+								<!--<li><a href="#"><i class="ion-chatbubble"></i>6</a></li>-->
+								<!--<li><a href="#"><i class="ion-eye"></i>138</a></li>-->
+							<!--</ul>-->
+
+						<!--</div>&lt;!&ndash; single-post &ndash;&gt;-->
+
+						<!--<div class="single-post">-->
+
+							<!--<div class="display-table">-->
+								<!--<h4 class="title display-table-cell"><a href="#"><b>How Did Van Gogh's Turbulent Mind Depict One of the Most Complex-->
+									<!--Concepts in Physics?</b></a></h4>-->
+							<!--</div>-->
+
+							<!--<ul class="post-footer">-->
+								<!--<li><a href="#"><i class="ion-heart"></i>57</a></li>-->
+								<!--<li><a href="#"><i class="ion-chatbubble"></i>6</a></li>-->
+								<!--<li><a href="#"><i class="ion-eye"></i>138</a></li>-->
+							<!--</ul>-->
+
+						<!--</div>&lt;!&ndash; single-post &ndash;&gt;-->
+
+					<!--</div>&lt;!&ndash; card &ndash;&gt;-->
+				<!--</div>&lt;!&ndash; col-lg-4 col-md-6 &ndash;&gt;-->
+
+				<!--<div class="col-lg-8 col-md-12">-->
+					<!--<div class="card h-100">-->
+						<!--<div class="single-post post-style-2">-->
+
+							<!--<div class="blog-image"><img src="bona/images/icons8-team-355990.jpg" alt="Blog Image"></div>-->
+
+							<!--<div class="blog-info">-->
+
+								<!--<h6 class="pre-title"><a href="#"><b>HEALTH</b></a></h6>-->
+
+								<!--<h4 class="title"><a href="#"><b>How Did Van Gogh's Turbulent Mind Depict One of the Most Complex-->
+									<!--Concepts in Physics?</b></a></h4>-->
+
+								<!--<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt-->
+									<!--ut labore et dolore magna aliqua. Ut enim ad minim veniam</p>-->
+
+								<!--<div class="avatar-area">-->
+									<!--<a class="avatar" href="#"><img src="bona/images/icons8-team-355979.jpg" alt="Profile Image"></a>-->
+									<!--<div class="right-area">-->
+										<!--<a class="name" href="#"><b>Lora Plamer</b></a>-->
+										<!--<h6 class="date" href="#">on Sep 29, 2017 at 9:48am</h6>-->
+									<!--</div>-->
+								<!--</div>-->
+
+								<!--<ul class="post-footer">-->
+									<!--<li><a href="#"><i class="ion-heart"></i>57</a></li>-->
+									<!--<li><a href="#"><i class="ion-chatbubble"></i>6</a></li>-->
+									<!--<li><a href="#"><i class="ion-eye"></i>138</a></li>-->
+								<!--</ul>-->
+
+							<!--</div>&lt;!&ndash; blog-right &ndash;&gt;-->
+
+						<!--</div>&lt;!&ndash; single-post extra-blog &ndash;&gt;-->
+
+					<!--</div>&lt;!&ndash; card &ndash;&gt;-->
+				<!--</div>&lt;!&ndash; col-lg-8 col-md-12 &ndash;&gt;-->
+
+			</div><!-- row -->
+
+			<a class="load-more-btn" href="#"><b>LOAD MORE</b></a>
+
+		</div><!-- container -->
+	</section><!-- section -->
+
+
+	<footer>
+
+		<div class="container">
+			<div class="row">
+
+				<div class="col-lg-4 col-md-6">
+					<div class="footer-section">
+
+						<a class="logo" href="#"><img src="bona/images/logo.png" alt="Logo Image"></a>
+						<p class="copyright">Bona @ 2017. All rights reserved.</p>
+						<p class="copyright">Designed by <a href="https://colorlib.com" target="_blank">Colorlib</a></p>
+						<ul class="icons">
+							<li><a href="#"><i class="ion-social-facebook-outline"></i></a></li>
+							<li><a href="#"><i class="ion-social-twitter-outline"></i></a></li>
+							<li><a href="#"><i class="ion-social-instagram-outline"></i></a></li>
+							<li><a href="#"><i class="ion-social-vimeo-outline"></i></a></li>
+							<li><a href="#"><i class="ion-social-pinterest-outline"></i></a></li>
+						</ul>
+
+					</div><!-- footer-section -->
+				</div><!-- col-lg-4 col-md-6 -->
+
+				<div class="col-lg-4 col-md-6">
+						<div class="footer-section">
+						<h4 class="title"><b>CATAGORIES</b></h4>
+						<ul>
+							<li><a href="#">BEAUTY</a></li>
+							<li><a href="#">HEALTH</a></li>
+							<li><a href="#">MUSIC</a></li>
+						</ul>
+						<ul>
+							<li><a href="#">SPORT</a></li>
+							<li><a href="#">DESIGN</a></li>
+							<li><a href="#">TRAVEL</a></li>
+						</ul>
+					</div><!-- footer-section -->
+				</div><!-- col-lg-4 col-md-6 -->
+
+				<div class="col-lg-4 col-md-6">
+					<div class="footer-section">
+
+						<h4 class="title"><b>SUBSCRIBE</b></h4>
+						<div class="input-area">
+							<form>
+								<input class="email-input" type="text" placeholder="Enter your email">
+								<button class="submit-btn" type="submit"><i class="icon ion-ios-email-outline"></i></button>
+							</form>
+						</div>
+
+					</div><!-- footer-section -->
+				</div><!-- col-lg-4 col-md-6 -->
+
+			</div><!-- row -->
+		</div><!-- container -->
+	</footer>
+
+
+	<!-- SCIPTS -->
+
+	<script src="bona/common-js/jquery-3.1.1.min.js"></script>
+
+	<script src="bona/common-js/tether.min.js"></script>
+
+	<script src="bona/common-js/bootstrap.js"></script>
+
+	<script src="bona/common-js/scripts.js"></script>
+
+</body>
+</html>

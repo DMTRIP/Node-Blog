@@ -1,7 +1,5 @@
 const express = require('express');
 const path = require('path');
-const passport = require('passport');
-const cookieParser = require('cookie-parser');
 // mongoose schema
 const Post = require('../models/post/post');
 
@@ -9,6 +7,11 @@ const router = express.Router();
 
 // get home page
 router.get('/', (req, res) => {
+  res.send('home page');
+});
+
+// get blog page
+router.get('/blog', (req, res) => {
   Post.find()
     .then((docs) => {
       console.log(docs);
@@ -16,11 +19,9 @@ router.get('/', (req, res) => {
     });
 });
 
-// get blog page
-router.get('/blog', (req, res) => {
-  res.send('blog page');
+router.get('/create-post', (req,res) => {
+  res.render('create-post');
 });
-
 
 // get about page
 router.get('/about', (req, res) => {
@@ -32,15 +33,7 @@ router.get('/contact', (req, res) => {
   res.send('contact page');
 });
 
-// get sign up page
-router.get('/registration', (req, res) => {
-  res.sendFile(path.join(__dirname, '../', '/public/reg-login-form/signUp.html'));
-});
 
-// get login page
-router.get('/login', (req, res) => {
-  res.sendFile(path.join(__dirname, '../', '/public/reg-login-form/login.html'));
-});
 
 // get single post page
 router.get('/single-post/:id', (req, res) => {
@@ -60,32 +53,13 @@ router.get('/single-post/:id', (req, res) => {
 });
 
 
-// check user login info
-router.post('/login', (req, res, next) => {
-  passport.authenticate('local', (err, user) => {
-    if (err) {
-      return next(err);
-    }
-    console.log(1);
-    res.cookie('id', user._id);
+router.get('/my-posts', (req,res) => {
+  const {id} = req.cookies;
+  console.log(id);
+  Post.find({author: id})
 
-    if (!user) {
-      return res.send(user);
-    }
-
-    console.log(user);
-    // write user id in cookie
-    const maxAge = 60 * 60 * 100 * 1000 * 1000 * 100000000000000;
-    res.cookie('id', user._id, { maxAge });
-
-    req.logIn(user, (err) => {
-      if (err) {
-        return next(err);
-      }
-      return res.redirect('/');
-    });
-  })(req, res, next);
 });
+
 
 
 module.exports = router;

@@ -13,8 +13,9 @@ const Post = require('./models/post/post');
 const User = require('./models/user/user');
 // Routes
 const postRouts = require('./routes/post');
-const publicRouts = require('./routes/common');
+const commonRoutes = require('./routes/common');
 const userRouts = require('./routes/user');
+const publicRoutes = require('./routes/public');
 
 const app = express();
 
@@ -74,10 +75,10 @@ const auth = (req, res, next) => {
     return res.redirect('/login');
   }
 };
-
-app.use('/', publicRouts);
-app.use('/post', postRouts);
-app.use('/user', userRouts);
+app.use('/', publicRoutes);
+app.use('/', auth, commonRoutes);
+app.use('/post', auth, postRouts);
+app.use('/user', auth, userRouts);
 
 
 app.listen(port, () => {

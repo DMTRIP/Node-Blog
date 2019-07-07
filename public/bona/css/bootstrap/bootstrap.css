@@ -2286,7 +2286,7 @@ textarea.form-control {
   }
 }
 
-.btn {
+.flip-btn {
   display: inline-block;
   font-weight: 400;
   text-align: center;
@@ -2305,30 +2305,30 @@ textarea.form-control {
 }
 
 @media screen and (prefers-reduced-motion: reduce) {
-  .btn {
+  .flip-btn {
     transition: none;
   }
 }
 
-.btn:hover, .btn:focus {
+.flip-btn:hover, .flip-btn:focus {
   text-decoration: none;
 }
 
-.btn:focus, .btn.focus {
+.flip-btn:focus, .flip-btn.focus {
   outline: 0;
   box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
 }
 
-.btn.disabled, .btn:disabled {
+.flip-btn.disabled, .flip-btn:disabled {
   opacity: 0.65;
 }
 
-.btn:not(:disabled):not(.disabled) {
+.flip-btn:not(:disabled):not(.disabled) {
   cursor: pointer;
 }
 
-a.btn.disabled,
-fieldset:disabled a.btn {
+a.flip-btn.disabled,
+fieldset:disabled a.flip-btn {
   pointer-events: none;
 }
 
@@ -2900,14 +2900,14 @@ fieldset:disabled a.btn {
   pointer-events: none;
 }
 
-.btn-lg, .btn-group-lg > .btn {
+.btn-lg, .btn-group-lg > .flip-btn {
   padding: 0.5rem 1rem;
   font-size: 1.25rem;
   line-height: 1.5;
   border-radius: 0.3rem;
 }
 
-.btn-sm, .btn-group-sm > .btn {
+.btn-sm, .btn-group-sm > .flip-btn {
   padding: 0.25rem 0.5rem;
   font-size: 0.875rem;
   line-height: 1.5;
@@ -3172,32 +3172,32 @@ input[type="button"].btn-block {
   vertical-align: middle;
 }
 
-.btn-group > .btn,
-.btn-group-vertical > .btn {
+.btn-group > .flip-btn,
+.btn-group-vertical > .flip-btn {
   position: relative;
   -ms-flex: 0 1 auto;
   flex: 0 1 auto;
 }
 
-.btn-group > .btn:hover,
-.btn-group-vertical > .btn:hover {
+.btn-group > .flip-btn:hover,
+.btn-group-vertical > .flip-btn:hover {
   z-index: 1;
 }
 
-.btn-group > .btn:focus, .btn-group > .btn:active, .btn-group > .btn.active,
-.btn-group-vertical > .btn:focus,
-.btn-group-vertical > .btn:active,
-.btn-group-vertical > .btn.active {
+.btn-group > .flip-btn:focus, .btn-group > .flip-btn:active, .btn-group > .flip-btn.active,
+.btn-group-vertical > .flip-btn:focus,
+.btn-group-vertical > .flip-btn:active,
+.btn-group-vertical > .flip-btn.active {
   z-index: 1;
 }
 
-.btn-group .btn + .btn,
-.btn-group .btn + .btn-group,
-.btn-group .btn-group + .btn,
+.btn-group .flip-btn + .flip-btn,
+.btn-group .flip-btn + .btn-group,
+.btn-group .btn-group + .flip-btn,
 .btn-group .btn-group + .btn-group,
-.btn-group-vertical .btn + .btn,
-.btn-group-vertical .btn + .btn-group,
-.btn-group-vertical .btn-group + .btn,
+.btn-group-vertical .flip-btn + .flip-btn,
+.btn-group-vertical .flip-btn + .btn-group,
+.btn-group-vertical .btn-group + .flip-btn,
 .btn-group-vertical .btn-group + .btn-group {
   margin-left: -1px;
 }
@@ -3215,18 +3215,18 @@ input[type="button"].btn-block {
   width: auto;
 }
 
-.btn-group > .btn:first-child {
+.btn-group > .flip-btn:first-child {
   margin-left: 0;
 }
 
-.btn-group > .btn:not(:last-child):not(.dropdown-toggle),
-.btn-group > .btn-group:not(:last-child) > .btn {
+.btn-group > .flip-btn:not(:last-child):not(.dropdown-toggle),
+.btn-group > .btn-group:not(:last-child) > .flip-btn {
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
 }
 
-.btn-group > .btn:not(:first-child),
-.btn-group > .btn-group:not(:first-child) > .btn {
+.btn-group > .flip-btn:not(:first-child),
+.btn-group > .btn-group:not(:first-child) > .flip-btn {
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
 }
@@ -3246,12 +3246,12 @@ input[type="button"].btn-block {
   margin-right: 0;
 }
 
-.btn-sm + .dropdown-toggle-split, .btn-group-sm > .btn + .dropdown-toggle-split {
+.btn-sm + .dropdown-toggle-split, .btn-group-sm > .flip-btn + .dropdown-toggle-split {
   padding-right: 0.375rem;
   padding-left: 0.375rem;
 }
 
-.btn-lg + .dropdown-toggle-split, .btn-group-lg > .btn + .dropdown-toggle-split {
+.btn-lg + .dropdown-toggle-split, .btn-group-lg > .flip-btn + .dropdown-toggle-split {
   padding-right: 0.75rem;
   padding-left: 0.75rem;
 }
@@ -3265,40 +3265,40 @@ input[type="button"].btn-block {
   justify-content: center;
 }
 
-.btn-group-vertical .btn,
+.btn-group-vertical .flip-btn,
 .btn-group-vertical .btn-group {
   width: 100%;
 }
 
-.btn-group-vertical > .btn + .btn,
-.btn-group-vertical > .btn + .btn-group,
-.btn-group-vertical > .btn-group + .btn,
+.btn-group-vertical > .flip-btn + .flip-btn,
+.btn-group-vertical > .flip-btn + .btn-group,
+.btn-group-vertical > .btn-group + .flip-btn,
 .btn-group-vertical > .btn-group + .btn-group {
   margin-top: -1px;
   margin-left: 0;
 }
 
-.btn-group-vertical > .btn:not(:last-child):not(.dropdown-toggle),
-.btn-group-vertical > .btn-group:not(:last-child) > .btn {
+.btn-group-vertical > .flip-btn:not(:last-child):not(.dropdown-toggle),
+.btn-group-vertical > .btn-group:not(:last-child) > .flip-btn {
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
 }
 
-.btn-group-vertical > .btn:not(:first-child),
-.btn-group-vertical > .btn-group:not(:first-child) > .btn {
+.btn-group-vertical > .flip-btn:not(:first-child),
+.btn-group-vertical > .btn-group:not(:first-child) > .flip-btn {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
 
-.btn-group-toggle > .btn,
-.btn-group-toggle > .btn-group > .btn {
+.btn-group-toggle > .flip-btn,
+.btn-group-toggle > .btn-group > .flip-btn {
   margin-bottom: 0;
 }
 
-.btn-group-toggle > .btn input[type="radio"],
-.btn-group-toggle > .btn input[type="checkbox"],
-.btn-group-toggle > .btn-group > .btn input[type="radio"],
-.btn-group-toggle > .btn-group > .btn input[type="checkbox"] {
+.btn-group-toggle > .flip-btn input[type="radio"],
+.btn-group-toggle > .flip-btn input[type="checkbox"],
+.btn-group-toggle > .btn-group > .flip-btn input[type="radio"],
+.btn-group-toggle > .btn-group > .flip-btn input[type="checkbox"] {
   position: absolute;
   clip: rect(0, 0, 0, 0);
   pointer-events: none;
@@ -3383,20 +3383,20 @@ input[type="button"].btn-block {
   display: flex;
 }
 
-.input-group-prepend .btn,
-.input-group-append .btn {
+.input-group-prepend .flip-btn,
+.input-group-append .flip-btn {
   position: relative;
   z-index: 2;
 }
 
-.input-group-prepend .btn + .btn,
-.input-group-prepend .btn + .input-group-text,
+.input-group-prepend .flip-btn + .flip-btn,
+.input-group-prepend .flip-btn + .input-group-text,
 .input-group-prepend .input-group-text + .input-group-text,
-.input-group-prepend .input-group-text + .btn,
-.input-group-append .btn + .btn,
-.input-group-append .btn + .input-group-text,
+.input-group-prepend .input-group-text + .flip-btn,
+.input-group-append .flip-btn + .flip-btn,
+.input-group-append .flip-btn + .input-group-text,
 .input-group-append .input-group-text + .input-group-text,
-.input-group-append .input-group-text + .btn {
+.input-group-append .input-group-text + .flip-btn {
   margin-left: -1px;
 }
 
@@ -3434,8 +3434,8 @@ input[type="button"].btn-block {
 .input-group-lg > .form-control,
 .input-group-lg > .input-group-prepend > .input-group-text,
 .input-group-lg > .input-group-append > .input-group-text,
-.input-group-lg > .input-group-prepend > .btn,
-.input-group-lg > .input-group-append > .btn {
+.input-group-lg > .input-group-prepend > .flip-btn,
+.input-group-lg > .input-group-append > .flip-btn {
   height: calc(2.875rem + 2px);
   padding: 0.5rem 1rem;
   font-size: 1.25rem;
@@ -3446,8 +3446,8 @@ input[type="button"].btn-block {
 .input-group-sm > .form-control,
 .input-group-sm > .input-group-prepend > .input-group-text,
 .input-group-sm > .input-group-append > .input-group-text,
-.input-group-sm > .input-group-prepend > .btn,
-.input-group-sm > .input-group-append > .btn {
+.input-group-sm > .input-group-prepend > .flip-btn,
+.input-group-sm > .input-group-append > .flip-btn {
   height: calc(1.8125rem + 2px);
   padding: 0.25rem 0.5rem;
   font-size: 0.875rem;
@@ -3455,21 +3455,21 @@ input[type="button"].btn-block {
   border-radius: 0.2rem;
 }
 
-.input-group > .input-group-prepend > .btn,
+.input-group > .input-group-prepend > .flip-btn,
 .input-group > .input-group-prepend > .input-group-text,
-.input-group > .input-group-append:not(:last-child) > .btn,
+.input-group > .input-group-append:not(:last-child) > .flip-btn,
 .input-group > .input-group-append:not(:last-child) > .input-group-text,
-.input-group > .input-group-append:last-child > .btn:not(:last-child):not(.dropdown-toggle),
+.input-group > .input-group-append:last-child > .flip-btn:not(:last-child):not(.dropdown-toggle),
 .input-group > .input-group-append:last-child > .input-group-text:not(:last-child) {
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
 }
 
-.input-group > .input-group-append > .btn,
+.input-group > .input-group-append > .flip-btn,
 .input-group > .input-group-append > .input-group-text,
-.input-group > .input-group-prepend:not(:first-child) > .btn,
+.input-group > .input-group-prepend:not(:first-child) > .flip-btn,
 .input-group > .input-group-prepend:not(:first-child) > .input-group-text,
-.input-group > .input-group-prepend:first-child > .btn:not(:first-child),
+.input-group > .input-group-prepend:first-child > .flip-btn:not(:first-child),
 .input-group > .input-group-prepend:first-child > .input-group-text:not(:first-child) {
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
@@ -4778,7 +4778,7 @@ input[type="button"].btn-block {
   display: none;
 }
 
-.btn .badge {
+.flip-btn .badge {
   position: relative;
   top: -1px;
 }
@@ -8956,7 +8956,7 @@ a.text-dark:hover, a.text-dark:focus {
     text-shadow: none !important;
     box-shadow: none !important;
   }
-  a:not(.btn) {
+  a:not(.flip-btn) {
     text-decoration: underline;
   }
   abbr[title]::after {

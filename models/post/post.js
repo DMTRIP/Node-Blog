@@ -6,7 +6,7 @@ const postSchema = Schema({
   // id user which send post
   author: { type: Schema.Types.ObjectId, required: true, ref: 'User' },
   title: String,
-  description: { type: String, maxLength: 600 },
+  body: { type: String, maxLength: 40000 },
   // category tags for post
   tags: [String],
   preview: {type: String, default: '/uploads/default-images/postdefault.jpeg'},

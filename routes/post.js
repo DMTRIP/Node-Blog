@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser');
 // mongoose schemas
 const Post = require('../models/post/post');
 const User = require('../models/user/user');
+const Comment = require('../models/post/post-comment');
 
 const storage = multer.diskStorage({
   destination(req, file, cb) {
@@ -81,6 +82,67 @@ router.post('/create', upload.single('postImage'), async (req, res) => {
       });
     });
 });
+
+// get all comments to post
+router.get('/comments', (req, res) => {
+  res.send('all comments');
+});
+
+// add comment to post
+router.post('/comment', (req, res) => {
+  // post id and massage
+  const { massage, id } = req.body;
+
+
+  Post.findById(id)
+    .then(({
+      id, author, authorName, authorAvatar,
+    }) => {
+      console.log(authorName);
+      const comment = new Comment({
+        _id: mongoose.Types.ObjectId(),
+        postId: id,
+        author,
+        authorName,
+        authorAvatar,
+        massage,
+      });
+      comment.save((err) => {
+        if (err) {
+          console.log(err);
+          return res.status(500).json({ err: 'err' });
+        }
+        res.status(200).json({ massage: 'comment has been added', author });
+      });
+    })
+    .catch(err => console.log(err));
+});
+
+router.get('/comment/last/:postId', async (req, res) => {
+  const { postId } = req.params;
+  const comments = await Comment.find({ postId }).exec();
+  // convert object to arr and return last comment
+  const commentArr = Object.keys(comments).map(i => comments[i]);
+  const comment = commentArr[(commentArr.length - 1)];
+  console.log(comment);
+  if (comments) {
+    res.status(200).json({ massage: `last comment for post: ${postId} found`, comment });
+  } else {
+    res.status(404).json({ massage: `comments with id: ${postId} not found` });
+  }
+});
+
+// get one post
+router.get('/one/:id', async (req, res) => {
+  const { id } = req.params;
+  const post = await Post.findById(id);
+  if (post) {
+    res.status(200).json({ massage: 'post found', post });
+  } else {
+    res.status(404).json({ massage: 'post not found' });
+  }
+});
+
 
 // edit post
 router.put('/edit', (req, res) => {

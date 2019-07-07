@@ -7,8 +7,6 @@ const router = express.Router();
 const UserSchema = require('../models/user/user');
 
 
-
-
 // Sign Up re-captcha verification
 router.post('/sign-up-re-captcha', (req, res) => {
   if (
@@ -44,10 +42,18 @@ router.get('/log-out', (req, res) => {
   req.logout();
   res.redirect('/login');
 });
-// Log in user
-// router.post('/login', (req, res) => {
-//   res.send('login user');
-// });
+
+router.get('/one/:id', async (req, res) => {
+  const { id } = req.params;
+
+  const user = await UserSchema.findById(id);
+
+  if (user) {
+    res.status(200).json({ massage: 'user found', user});
+  } else {
+    res.status(404).json({ massage: 'bad request' });
+  }
+});
 
 
 module.exports = router;

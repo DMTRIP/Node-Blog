@@ -2,6 +2,8 @@ const express = require('express');
 const path = require('path');
 // mongoose schema
 const Post = require('../models/post/post');
+const Comment = require('../models/post/post-comment');
+const User = require('../models/user/user');
 
 const router = express.Router();
 
@@ -14,7 +16,8 @@ router.get('/', (req, res) => {
 router.get('/blog', (req, res) => {
   Post.find()
     .then((docs) => {
-      res.render('blog', { post: docs.map(e => e) });
+      // делаем revers для того чтобы сначала выводить полседные посты
+      res.render('blog', { post: docs.reverse() });
     });
 });
 
@@ -34,27 +37,37 @@ router.get('/contact', (req, res) => {
 
 
 // get single post page
-router.get('/single-post/:id', (req, res) => {
+router.get('/single-post/:id', async (req, res) => {
+  // post id
   const { id } = req.params;
-  Post.findById(id)
-    .then((doc) => {
-      if (!doc) {
-        return res.status(404).json({ massage: 'Post not found' });
-      }
-      const { body } = doc;
+  // the post
+  const post = await Post.findById(id);
+  // post's comments
+  const postId = String(post._id);
+  const comments = await Comment.find({ postId }).exec();
+  // comments' author
+  const author = await User.findById(post.author);
 
-      // dived description on two parts fro blog page
-      const firsDiscripton = body.slice(0,body.length / 2);
-      const secondDesription = body.slice(body.length / 2 + 1);
-      res.render('single-post-1', { post: doc, firsDiscripton, secondDesription });
-    });
+
+  const { body } = post;
+  //  new comments first
+  comments.reverse();
+
+// comments amount
+const commetsAmt = comments.length;
+  console.log(comments);
+  const firsDiscripton = body.slice(0, body.length / 2);
+  const secondDesription = body.slice(body.length / 2 + 1);
+  res.render('single-post-1', {
+    post, firsDiscripton, secondDesription, comments, commetsAmt,
+  });
 });
 
 
 router.get('/my-posts', (req, res) => {
   const { id } = req.cookies;
   console.log(id);
-  Post.find({author: id})
+  Post.find({ author: id })
     .exec()
     .then((result) => {
       console.log(result);

@@ -14,12 +14,11 @@ router.get('/', (req, res) => {
 router.get('/blog', (req, res) => {
   Post.find()
     .then((docs) => {
-      console.log(docs);
-      res.render('index', { post: docs.map(e => e) });
+      res.render('blog', { post: docs.map(e => e) });
     });
 });
 
-router.get('/create-post', (req,res) => {
+router.get('/create-post', (req, res) => {
   res.render('create-post');
 });
 
@@ -34,7 +33,6 @@ router.get('/contact', (req, res) => {
 });
 
 
-
 // get single post page
 router.get('/single-post/:id', (req, res) => {
   const { id } = req.params;
@@ -43,23 +41,31 @@ router.get('/single-post/:id', (req, res) => {
       if (!doc) {
         return res.status(404).json({ massage: 'Post not found' });
       }
-      console.log(doc);
-      const { description } = doc;
+      const { body } = doc;
+
       // dived description on two parts fro blog page
-      const firsDiscripton =  description.slice(0, (description.length / 2));
-      const secondDesription = description.slice((description.length / 2 + 1));
-        res.render('single-post-1', { post: doc,firsDiscripton,secondDesription });
+      const firsDiscripton = body.slice(0,body.length / 2);
+      const secondDesription = body.slice(body.length / 2 + 1);
+      res.render('single-post-1', { post: doc, firsDiscripton, secondDesription });
     });
 });
 
 
-router.get('/my-posts', (req,res) => {
-  const {id} = req.cookies;
+router.get('/my-posts', (req, res) => {
+  const { id } = req.cookies;
   console.log(id);
   Post.find({author: id})
-
+    .exec()
+    .then((result) => {
+      console.log(result);
+      res.render('blog', { post: result });
+    })
+    .catch((err) => {
+      res.status(500).json({
+        err,
+      });
+    });
 });
-
 
 
 module.exports = router;

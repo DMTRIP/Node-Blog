@@ -52,7 +52,7 @@ postYes.addEventListener('click', async (e) => {
       Accept: 'application/json, text/plain, */*',
       'Content-type': 'application/json',
     },
-    body: JSON.stringify({ title, postImage, body: data, id: '5d1e35c66449bd7317ca971d' }),
+    body: JSON.stringify({ title, postImage, body: data }),
   });
 
   if(res.status === 201) {

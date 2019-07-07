@@ -40,8 +40,9 @@ router.post('/sign-up-re-captcha', (req, res) => {
 });
 
 
-router.get('/bla', (req, res) => {
-  res.send('bla page');
+router.get('/log-out', (req, res) => {
+  req.logout();
+  res.redirect('/login');
 });
 // Log in user
 // router.post('/login', (req, res) => {

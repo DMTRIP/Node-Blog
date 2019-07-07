@@ -42,7 +42,6 @@ router.post('/sign-up', (req, res) => {
 // check user login info
 router.post('/login', (req, res, next) => {
   passport.authenticate('local', (err, user) => {
-    console.log(1);
     if (err) {
       return next(err);
     }
@@ -50,7 +49,6 @@ router.post('/login', (req, res, next) => {
     if (!user) {
       return res.redirect('/');
     }
-    console.log(2);
     res.cookie('id', user._id,{maxAge: new Date(Date.now() + 100 * 1000)});
 
     req.logIn(user, (err) => {

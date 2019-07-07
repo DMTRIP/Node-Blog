@@ -37,7 +37,7 @@ const { app: { port } } = require('./config/config');
 app.set('view engine', 'hbs');
 
 // client views
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname,'public')));
 app.use('/single-post', express.static('public'));
 // user, post images
 app.use('/uploads', express.static('uploads'));

@@ -47,7 +47,7 @@ router.get('/', (req, res) => {
 
 // create new post
 router.post('/create', upload.single('postImage'), async (req, res) => {
-  const { id } = req.body;
+  const { id } = req.cookies;
   // почемуто не предаатся id нужно это выяснить
   console.log(req.body);
   // image for post

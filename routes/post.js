@@ -123,10 +123,11 @@ router.get('/comment/last/:postId', async (req, res) => {
   const comments = await Comment.find({ postId }).exec();
   // convert object to arr and return last comment
   const commentArr = Object.keys(comments).map(i => comments[i]);
-  const comment = commentArr[(commentArr.length - 1)];
-  console.log(comment);
+  // last comment
+  const comment = commentArr[commentArr.length - 1];
+
   if (comments) {
-    res.status(200).json({ massage: `last comment for post: ${postId} found`, comment });
+    res.status(200).json({ massage: `last comment for post: ${postId} found`, comment: comment });
   } else {
     res.status(404).json({ massage: `comments with id: ${postId} not found` });
   }

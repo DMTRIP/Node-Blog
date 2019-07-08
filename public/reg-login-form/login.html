@@ -22,7 +22,7 @@
    <div class="signin-content">
     <div class="signin-image">
      <figure><img src="reg-login-form/images/signin-image.jpg" alt="sing up image"></figure>
-     <a href="#" class="signup-image-link">Create an account</a>
+     <a href="/registration" class="signup-image-link">Create an account</a>
     </div>
 
     <div class="signin-form">
@@ -40,6 +40,13 @@
        <input type="checkbox" name="remember-me" id="remember-me" class="agree-term" />
        <label for="remember-me" class="label-agree-term"><span><span></span></span>Remember me</label>
       </div>
+
+      <div class="form-group">
+       <div class="g-recaptcha" data-sitekey="6LfgMqwUAAAAAMIS_TSYyxFq8Lf33f5cFgHNzg-e" data-callback="verifyRecaptchaCallback" data-expired-callback="expiredRecaptchaCallback"></div>
+       <small class="captcha-failed">Please complete the Captcha</small>
+       <div class="help-block with-errors"></div>
+      </div>
+
       <div class="form-group form-button">
        <input type="submit" name="signin" id="signin" class="form-submit" value="Log in"/>
       </div>
@@ -61,5 +68,7 @@
 
 <!-- JS -->
 <script src="reg-login-form/vendor/jquery/jquery.min.js"></script>
+<script src='https://www.google.com/recaptcha/api.js'></script>
+<script src="reg-login-form/js/login-main.js"></script>
 </body><!-- This templates was made by Colorlib (https://colorlib.com) -->
 </html>

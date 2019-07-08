@@ -13,12 +13,35 @@ router.get('/', (req, res) => {
 });
 
 // get blog page
-router.get('/blog', (req, res) => {
-  Post.find()
-    .then((docs) => {
-      // делаем revers для того чтобы сначала выводить полседные посты
-      res.render('blog', { post: docs.reverse() });
+router.get('/blog', async (req, res) => {
+  let post;
+  let comment;
+
+  try {
+    post = await Post.find({  }).exec();
+    if (!post) return cb('no post found');
+  } catch (err) {
+    return cb('Unexpected error occurred');
+  }
+
+  try {
+    comment = await Comment.find({}).exec();
+    if (!comment) return cb('no post found');
+  } catch (err) {
+    return cb('Unexpected error occurred');
+  }
+
+  // post's comment amount
+  post.map((pE) => {
+    pE.commentAmt = 0;
+    comment.map((cE) => {
+      if (cE.postId == pE._id) {
+        pE.commentAmt++;
+      }
     });
+  });
+  post.reverse();
+  res.render('blog', { post });
 });
 
 router.get('/create-post', (req, res) => {
@@ -53,8 +76,8 @@ router.get('/single-post/:id', async (req, res) => {
   //  new comments first
   comments.reverse();
 
-// comments amount
-const commetsAmt = comments.length;
+  // comments amount
+  const commetsAmt = comments.length;
   console.log(comments);
   const firsDiscripton = body.slice(0, body.length / 2);
   const secondDesription = body.slice(body.length / 2 + 1);
@@ -64,20 +87,36 @@ const commetsAmt = comments.length;
 });
 
 
-router.get('/my-posts', (req, res) => {
+router.get('/my-posts', async (req, res) => {
   const { id } = req.cookies;
-  console.log(id);
-  Post.find({ author: id })
-    .exec()
-    .then((result) => {
-      console.log(result);
-      res.render('blog', { post: result });
-    })
-    .catch((err) => {
-      res.status(500).json({
-        err,
-      });
+  let post;
+  let comment;
+
+  try {
+    post = await Post.find({ author: id }).exec();
+    if (!post) return cb('no post found');
+  } catch (err) {
+    return cb('Unexpected error occurred');
+  }
+
+  try {
+    comment = await Comment.find({}).exec();
+    if (!comment) return cb('no post found');
+  } catch (err) {
+    return cb('Unexpected error occurred');
+  }
+
+  // post's comment amount
+  post.map((pE) => {
+    pE.commentAmt = 0;
+    comment.map((cE) => {
+      if (cE.postId == pE._id) {
+        pE.commentAmt++;
+      }
     });
+  });
+
+  res.render('blog', { post });
 });
 
 

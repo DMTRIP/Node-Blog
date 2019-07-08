@@ -33,7 +33,7 @@ router.post('/sign-up-re-captcha', (req, res) => {
     }
 
     // If Successful
-    return res.json({ success: true, msg: 'Captcha passed' });
+    return res.status(200).json({ success: true, msg: 'Captcha passed' });
   });
 });
 

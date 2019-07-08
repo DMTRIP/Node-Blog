@@ -32,8 +32,10 @@ submit.addEventListener('click', async (e) => {
 
       const commentRes = await fetch(`/post/comment/last/${id}`);
       const comment = await commentRes.json();
-      console.log(`last comment: ${comment}`);
-      const { created } = comment;
+      // date create of comment
+      const { created } = comment.comment;
+      console.log(comment.comment);
+
 
       const div = document.createElement('div');
       console.log(Author.user);

@@ -5,6 +5,7 @@ Simple blog on node js
    - Go to the project folder
    - Enter command npm start
    - http://localhost:3000/blog
+  
     
  
 

@@ -4,8 +4,12 @@ module.exports = {
         "commonjs": true,
         "es6": true
     },
-    "extends": ["airbnb", "prettier"],
-    "plugins": ["prettier"],
+    "extends": [
+        "airbnb"
+    ],
+    "plugins": [
+        // "prettier"
+    ],
     "globals": {
         "Atomics": "readonly",
         "SharedArrayBuffer": "readonly"
@@ -14,6 +18,8 @@ module.exports = {
         "ecmaVersion": 2018
     },
     "rules": {
-        "prettier/prettier": ["error"]
+        // "prettier/prettier": [
+        //     "error"
+        // ]
     }
 };

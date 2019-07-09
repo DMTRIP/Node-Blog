@@ -9,9 +9,9 @@ const postSchema = Schema({
   body: { type: String, maxLength: 40000 },
   // category tags for post
   tags: [String],
-  preview: {type: String, default: '/uploads/default-images/postdefault.jpeg'},
-  authorAvatar: {type: String, default: '/uploads/default-images/profiledefault.png'},
-  authorName: {type: String, maxLength: 40},
+  preview: { type: String, default: '/uploads/default-images/postdefault.jpeg' },
+  authorAvatar: { type: String, default: '/uploads/default-images/profiledefault.png' },
+  authorName: { type: String, maxLength: 40 },
   created: { type: Date, default: Date().toLocaleString('en-US', { hour12: false }) },
 });
 

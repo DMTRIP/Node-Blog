@@ -41,7 +41,13 @@ router.get('/blog', async (req, res) => {
     });
   });
   post.reverse();
-  res.render('blog', { post });
+  const tenFirstPosts = [];
+
+  for(let i = 0; i < 10; i++) {
+    tenFirstPosts.push(post[i]);
+  }
+
+  res.render('blog', { post: tenFirstPosts });
 });
 
 router.get('/create-post', (req, res) => {
@@ -116,7 +122,9 @@ router.get('/my-posts', async (req, res) => {
     });
   });
 
-  res.render('blog', { post });
+  post.reverse();
+
+  res.render('my-posts', { post });
 });
 
 

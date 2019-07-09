@@ -127,7 +127,7 @@ router.get('/comment/last/:postId', async (req, res) => {
   const comment = commentArr[commentArr.length - 1];
 
   if (comments) {
-    res.status(200).json({ massage: `last comment for post: ${postId} found`, comment: comment });
+    res.status(200).json({ massage: `last comment for post: ${postId} found`, comment });
   } else {
     res.status(404).json({ massage: `comments with id: ${postId} not found` });
   }
@@ -144,6 +144,46 @@ router.get('/one/:id', async (req, res) => {
   }
 });
 
+router.get('/page/:num', async (req, res) => {
+  const { num } = req.params;
+
+  const post = await Post.find({}).exec();
+
+  if (!post) return res.status(404).json({ massage: '[page not found' });
+
+  let comment;
+  try {
+    comment = await Comment.find({}).exec();
+    if (!comment) return cb('no post found');
+  } catch (err) {
+    return cb('Unexpected error occurred');
+  }
+
+  // ten posts
+  const page = [];
+
+  post.map((pE) => {
+    comment.map((cE) => {
+      if (cE.postId == pE._id) {
+        console.log(1);
+        pE.tags.push[1];
+      }
+    });
+  });
+
+
+
+  for (let i = num * 10; i < (num * 10) + 10; i++) {
+    if(post[i] !== null) {
+      page.push(post[i]);
+    }
+  }
+
+  page.reverse();
+
+  console.log(typeof page);
+  res.status(200).json({ page });
+});
 
 // edit post
 router.put('/edit', (req, res) => {

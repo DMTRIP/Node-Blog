@@ -7,28 +7,24 @@ const FileStore = require('session-file-store')(expressSession);
 const passport = require('passport');
 const cookieParser = require('cookie-parser');
 
-require('./config/db/db');
+require('./config/mongodb-config');
 // mongoose schemas
-const Post = require('./models/post/post');
-const User = require('./models/user/user');
+const Post = require('./models/mongodb/mongoose-models/post');
+const User = require('./models/mongodb/mongoose-models/user');
 // Routes
-const postRouts = require('./routes/post');
-const commonRoutes = require('./routes/common');
-const userRouts = require('./routes/user');
 const publicRoutes = require('./routes/public');
+
+const blogRoute = require('./routes/blog');
 
 const app = express();
 
-hbs.registerHelper('if_st', function (templateAtribut, compareAtreibut, opts) {
-  if (templateAtribut === compareAtreibut) {
-    return opts.fn(this);
-  }
-  return opts.inverse(this);
-});
+// help show define arr's elements amount
+hbs.registerHelper('each_limit', function (arr, max, options) {
+  if (!arr || arr.length === 0) return options.inverse(this);
 
-hbs.registerHelper('dataFormat', (value) => {
-  //console.log(value.slice(0,17));
-  return value.slice(0);
+  const result = [];
+  for (let i = 0; i < max && i < arr.length; ++i) result.push(options.fn(arr[i]));
+  return result.join('');
 });
 
 const { app: { port } } = require('./config/config');
@@ -37,11 +33,10 @@ const { app: { port } } = require('./config/config');
 app.set('view engine', 'hbs');
 
 // client views
-app.use(express.static(path.join(__dirname,'public')));
-app.use('/single-post', express.static('public'));
+app.use(express.static(path.join(__dirname, '/public')));
+
 // user, post images
 app.use('/uploads', express.static('uploads'));
-app.use('/single-post', express.static('uploads'));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -75,11 +70,9 @@ const auth = (req, res, next) => {
     return res.redirect('/login');
   }
 };
-app.use('/', publicRoutes);
-app.use('/', auth, commonRoutes);
-app.use('/post', auth, postRouts);
-app.use('/user', auth, userRouts);
 
+app.use('/', publicRoutes);
+app.use('/blog', auth, blogRoute);
 
 app.listen(port, () => {
   console.log(`App is running on port: ${port}`);

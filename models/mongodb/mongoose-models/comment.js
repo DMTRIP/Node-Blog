@@ -4,18 +4,20 @@ const mongoose = require('mongoose');
 const commentSchema = Schema({
   _id: Schema.Types.ObjectId,
   postId: {
-    type: Schema.Types.Object, ref: 'Post', required: true, maxLength: 2000,
+    type: Schema.Types.Object, ref: 'Post', required: true,
   },
   // id user which left comment
-  author: {
-    type: Schema.Types.Object, ref: 'User', required: true, maxLength: 2000,
+  authorId: {
+    type: Schema.Types.ObjectId, ref: 'User', required: true,
   },
   // user comment
   massage: {
     type: String, minLength: 1, maxLength: 2000, required: true,
   },
-  authorName: { type: String, maxLength: 100 },
-  authorAvatar: { type: String, maxLength: 200 },
+
+  authorAvatar: String,
+  authorName: String,
+
   created: { type: Date, default: Date.now() },
 });
 

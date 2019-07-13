@@ -14,15 +14,15 @@
 
 	<!-- Stylesheets -->
 
-	<link href="bona/css/bootstrap/bootstrap.css" rel="stylesheet">
+	<link href="/bona/css/bootstrap/bootstrap.css" rel="stylesheet">
 
-	<link href="bona/css/ionicons.min.css" rel="stylesheet">
+	<link href="/bona/css/ionicons.min.css" rel="stylesheet">
 
 
-	<link href="bona/layout-1/css/styles.css" rel="stylesheet">
+	<link href="/bona/layout-1/css/styles.css" rel="stylesheet">
 
-	<link href="bona/layout-1/css/responsive.css" rel="stylesheet">
- <link href="bona/common-css/custom-header-menu.css" rel="stylesheet">
+	<link href="/bona/layout-1/css/responsive.css" rel="stylesheet">
+ <link href="/bona/common-css/custom-header-menu.css" rel="stylesheet">
 
 </head>
 <body >
@@ -31,7 +31,7 @@
  <div class="container-fluid position-relative no-side-padding">
   <div class="header-menu">
    <div class="container" style="max-width: 1500px !important;">
-    <a href="#" class="logo"><img src="bona/images/logo.png" alt="Logo Image"></a>
+    <a href="#" class="logo"><img src="/bona/images/logo.png" alt="Logo Image"></a>
     <div class="tutorial">
      <div class="src-area">
       <form>
@@ -41,18 +41,18 @@
      </div>
      <ul>
       <li><a href="/">Home</a></li>
-      <li><a href="/blog">Blog</a></li>
+      <li><a href="/bona">Blog</a></li>
       <li>Post <i class="fa fa-angle-down"></i>
        <ul>
-        <li><a href="/create-post">Add post</a></li>
-        <li><a href="/my-posts">My posts </a></li>
+        <li><a href="/blog/post/create">Add post</a></li>
+        <li><a href="/my-post">My posts </a></li>
         <li><a href="/post-on-approve">Post on approve</a></li>
        </ul>
       </li>
       <li>Me <i class="fa fa-angle-down"></i>
        <ul>
         <li>My profile</li>
-        <li><a href="/user/log-out">Log out</a></li>
+        <li><a href="/log-out">Log out</a></li>
        </ul>
       </li>
       <li>Contact</li>
@@ -81,7 +81,7 @@
 	<section class="blog-area section">
 		<div class="container">
 			<div class="row add-post">
-             {{#each post}}
+             {{#each_limit post 10}}
               <div class="col-lg-4 col-md-6">
                       <div class="card h-100">
                        <div class="single-post post-style-1">
@@ -92,11 +92,11 @@
 
                         <div class="blog-info">
 
-                         <h4 class="title"><a href="single-post/{{_id}}"><b>{{title}}</b></a></h4>
+                         <h4 class="title"><a href="/blog/post/{{_id}}"><b>{{title}}</b></a></h4>
 
                          <ul class="post-footer">
                           <li><a href="#"><i class="ion-heart"></i>57</a></li>
-                          <li><a href="#"><i class="ion-chatbubble"></i>{{commentAmt}}</a></li>
+                          <li><a href="#"><i class="ion-chatbubble"></i>{{comments.length}}</a></li>
                           <li><a href="#"><i class="ion-eye"></i>138</a></li>
                          </ul>
 
@@ -106,7 +106,7 @@
                      </div><!-- col-lg-4 col-md-6 -->
              {{else}}
               <h1>no post was found</h1>
-             {{/each}}
+             {{/each_limit}}
 
 			</div><!-- row -->
 
@@ -124,7 +124,7 @@
 				<div class="col-lg-4 col-md-6">
 					<div class="footer-section">
 
-						<a class="logo" href="#"><img src="bona/images/logo.png" alt="Logo Image"></a>
+						<a class="logo" href="#"><img src="/bona/images/logo.png" alt="Logo Image"></a>
 						<p class="copyright">Bona @ 2017. All rights reserved.</p>
 						<p class="copyright">Designed by <a href="https://colorlib.com" target="_blank">Colorlib</a></p>
 						<ul class="icons">
@@ -175,15 +175,15 @@
 
 	<!-- SCIPTS -->
 
-	<script src="bona/common-js/jquery-3.1.1.min.js"></script>
+	<script src="/bona/common-js/jquery-3.1.1.min.js"></script>
 
-	<script src="bona/common-js/tether.min.js"></script>
+	<script src="/bona/common-js/tether.min.js"></script>
 
-	<script src="bona/common-js/bootstrap.js"></script>
+	<script src="/bona/common-js/bootstrap.js"></script>
 
-	<script src="bona/common-js/scripts.js"></script>
+	<script src="/bona/common-js/scripts.js"></script>
 
-	<script src="bona/common-js/blog-main.js"></script>
+	<script src="/bona/common-js/blog-main.js"></script>
 
 
 </body>

@@ -1,4 +1,4 @@
-const { Schema} = require('mongoose');
+const { Schema } = require('mongoose');
 const mongoose = require('mongoose');
 // дополнительная провека на уникальность значения поля
 const uniqueValidator = require('mongoose-unique-validator');
@@ -21,6 +21,8 @@ const userSchema = new Schema({
   type: { type: String, default: 'user' },
   avatar: { type: String },
 
+  // array for populate
+  comments: [{ type: Schema.Types.ObjectId, ref: 'Comment' }],
   posts: [{ type: Schema.Types.ObjectId, ref: 'Post' }],
 });
 

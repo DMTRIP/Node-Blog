@@ -22,7 +22,7 @@ class ParseData {
       const smallest = Math.min.apply(null, data.match(/\d+/g));
       const firstIndex = data.indexOf(`<h${smallest}>`);
       const lastIndex = data.indexOf(`</h${smallest}>`);
-      return data.slice(firstIndex + 4, lastIndex);
+      return data.slice(0, 55);
     }
   }
 
@@ -46,7 +46,7 @@ postYes.addEventListener('click', async (e) => {
   // document.cookie = 'id=5d1e35c66449bd7317ca971d';
   // console.log(document.cookie);
 
-  const res = await fetch('/post/create', {
+  const res = await fetch('/blog/post/create', {
     method: 'POST',
     headers: {
       Accept: 'application/json, text/plain, */*',
@@ -61,7 +61,6 @@ postYes.addEventListener('click', async (e) => {
   } else {
     alert('post was not created try again');
   }
-
 
 });
 

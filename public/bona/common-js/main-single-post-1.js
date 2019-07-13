@@ -1,40 +1,46 @@
 const submit = document.querySelector('.post-comment');
 const commentArr = [];
 
+// quick display comment with fetch without reload
 submit.addEventListener('click', async (e) => {
   e.preventDefault();
 
   const massage = document.querySelector('.text-area-messge').value;
   const massageInput = document.querySelector('.text-area-messge');
   //
-  const id = massageInput.getAttribute('id');
-  console.log(id);
+  const postId = massageInput.getAttribute('id');
+  const authorId = massageInput.getAttribute('authorId');
+  console.log(postId);
   if (massage !== '') {
-    const res = await fetch('/post/comment', {
+    const res = await fetch('/blog/post/comment/create', {
       method: 'POST',
       headers: {
         Accept: 'application/json, text/plain, */*',
         'Content-type': 'application/json',
       },
-      body: JSON.stringify({ massage, id }),
+      body: JSON.stringify({ massage, id: postId }),
     });
+    const data = await res.json();
+    const commentId = data.comment;
 
 
-    if (res.status === 200) {
+    if (res.status === 201) {
       // place for append comment
       const commentArea = document.querySelector('.new-comment');
-      // user's id
-      const { author } = await res.json();
+
       // post's author
-      const userRes = await fetch(`/user/one/${author}`);
+      const userRes = await fetch(`/blog/user/${authorId}`);
       const Author = await userRes.json();
       const { name } = Author.user;
 
-      const commentRes = await fetch(`/post/comment/last/${id}`);
+      const commentRes = await fetch(`/blog/post/comment/${commentId}`);
       const comment = await commentRes.json();
+
       // date create of comment
       const { created } = comment.comment;
-      console.log(comment.comment);
+
+
+
 
 
       const div = document.createElement('div');
@@ -79,5 +85,10 @@ submit.addEventListener('click', async (e) => {
   } else {
     alert('comment was not added try again');
   }
+});
+
+// more comments btn
+const moreComments = document.querySelector('.more-comment-btn');
+moreComments.addEventListener('click', e => {
 
 });

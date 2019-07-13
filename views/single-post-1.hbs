@@ -15,15 +15,15 @@
 
 	<!-- Stylesheets -->
 
-	<link href="bona/common-css/bootstrap.css" rel="stylesheet">
+	<link href="/bona/common-css/bootstrap.css" rel="stylesheet">
 
-	<link href="bona/common-css/ionicons.css" rel="stylesheet">
+	<link href="/bona/common-css/ionicons.css" rel="stylesheet">
 
 
-	<link href="bona/single-post-1/css/styles.css" rel="stylesheet">
+	<link href="/bona/single-post-1/css/styles.css" rel="stylesheet">
 
-	<link href="bona/single-post-1/css/responsive.css" rel="stylesheet">
-	<link href="bona/common-css/custom-header-menu.css" rel="stylesheet">
+	<link href="/bona/single-post-1/css/responsive.css" rel="stylesheet">
+	<link href="/bona/common-css/custom-header-menu.css" rel="stylesheet">
 
 </head>
 <body >
@@ -37,7 +37,7 @@
 		<div class="container-fluid position-relative no-side-padding">
         <div class="header-menu">
          <div class="container">
-          <a href="#" class="logo"><img src="bona/images/logo.png" alt="Logo Image"></a>
+          <a href="#" class="logo"><img src="/bona/images/logo.png" alt="Logo Image"></a>
           <div class="tutorial">
            <div class="src-area">
             <form>
@@ -217,9 +217,9 @@
 					<div class="card h-100">
 						<div class="single-post post-style-1">
 
-							<div class="blog-image"><img src="bona/images/alex-lambley-205711.jpg" alt="Blog Image"></div>
+							<div class="blog-image"><img src="/bona/images/alex-lambley-205711.jpg" alt="Blog Image"></div>
 
-							<a class="avatar" href="#"><img src="bona/images/icons8-team-355979.jpg" alt="Profile Image"></a>
+							<a class="avatar" href="#"><img src="/bona/images/icons8-team-355979.jpg" alt="Profile Image"></a>
 
 							<div class="blog-info">
 
@@ -241,9 +241,9 @@
 					<div class="card h-100">
 						<div class="single-post post-style-1">
 
-							<div class="blog-image"><img src="bona/images/caroline-veronez-165944.jpg" alt="Blog Image"></div>
+							<div class="blog-image"><img src="/bona/images/caroline-veronez-165944.jpg" alt="Blog Image"></div>
 
-							<a class="avatar" href="#"><img src="bona/images/icons8-team-355979.jpg" alt="Profile Image"></a>
+							<a class="avatar" href="#"><img src="/bona/images/icons8-team-355979.jpg" alt="Profile Image"></a>
 
 							<div class="blog-info">
 								<h4 class="title"><a href="#"><b>How Did Van Gogh's Turbulent Mind Depict One of the Most Complex
@@ -265,9 +265,9 @@
 					<div class="card h-100">
 						<div class="single-post post-style-1">
 
-							<div class="blog-image"><img src="bona/images/marion-michele-330691.jpg" alt="Blog Image"></div>
+							<div class="blog-image"><img src="/bona/images/marion-michele-330691.jpg" alt="Blog Image"></div>
 
-							<a class="avatar" href="#"><img src="bona/images/icons8-team-355979.jpg" alt="Profile Image"></a>
+							<a class="avatar" href="#"><img src="/bona/images/icons8-team-355979.jpg" alt="Profile Image"></a>
 
 							<div class="blog-info">
 								<h4 class="title"><a href="#"><b>How Did Van Gogh's Turbulent Mind Depict One of the Most Complex
@@ -310,7 +310,7 @@
 								<!--</div>&lt;!&ndash; col-sm-6 &ndash;&gt;-->
 
 								<div class="col-sm-12">
-									<textarea id="{{post.id}}" name="contact-form-message" rows="2" class="text-area-messge form-control"
+									<textarea id="{{post._id}}" authorId="{{post.author}}" name="contact-form-message" rows="2" class="text-area-messge form-control"
 										placeholder="Enter your comment" aria-required="true" aria-invalid="false"></textarea >
 								</div><!-- col-sm-12 -->
 								<div class="col-sm-12">
@@ -321,13 +321,13 @@
 						</form>
 					</div><!-- comment-form -->
 
-					<h4><b>COMMENTS({{commetsAmt}})</b></h4>
+					<h4><b>COMMENTS({{comments.length}})</b></h4>
                  <!--feature comment-->
                  <div class=" new-comment ">
 
                  </div>
 
-                 {{#each comments}}
+                 {{#each_limit comments 3}}
 					<div class="commnets-area">
 
 						<div class="comment">
@@ -350,9 +350,9 @@
 						</div>
 
 					</div><!-- commnets-area -->
-                 {{/each}}
+                 {{/each_limit}}
 
-					<a class="more-comment-btn" href="#"><b>VIEW MORE COMMENTS</a>
+                 <p class="more-comment-btn" href="#"><b>VIEW MORE COMMENTS</b></p>
 
 				</div><!-- col-lg-8 col-md-12 -->
 
@@ -369,7 +369,7 @@
 				<div class="col-lg-4 col-md-6">
 					<div class="footer-section">
 
-						<a class="logo" href="#"><img src="bona/images/logo.png" alt="Logo Image"></a>
+						<a class="logo" href="#"><img src="/bona/images/logo.png" alt="Logo Image"></a>
 						<p class="copyright">Bona @ 2017. All rights reserved.</p>
 						<p class="copyright">Designed by <a href="https://colorlib.com" target="_blank">Colorlib</a></p>
 						<ul class="icons">
@@ -420,15 +420,15 @@
 
 	<!-- SCIPTS -->
 
-	<script src="bona/common-js/jquery-3.1.1.min.js"></script>
+	<script src="/bona/common-js/jquery-3.1.1.min.js"></script>
 
-	<script src="bona/common-js/tether.min.js"></script>
+	<script src="/bona/common-js/tether.min.js"></script>
 
-	<script src="bona/common-js/bootstrap.js"></script>
+	<script src="/bona/common-js/bootstrap.js"></script>
 
-	<script src="bona/common-js/scripts.js"></script>
+	<script src="/bona/common-js/scripts.js"></script>
 
-    <script src="bona/common-js/main-single-post-1.js"></script>
+    <script src="/bona/common-js/main-single-post-1.js"></script>
 
 </body>
 </html>

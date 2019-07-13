@@ -3,7 +3,7 @@ const LocalStrategy = require('passport-local').Strategy;
 const cookieParser = require('cookie-parser');
 
 // require mongoose user model
-const User = require('../models/user/user');
+const User = require('../models/mongodb/mongoose-models/user');
 
 passport.serializeUser((user, done) => {
   console.log('Сериализация: ', user);

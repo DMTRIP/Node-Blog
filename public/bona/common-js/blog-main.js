@@ -16,17 +16,17 @@ load.addEventListener('click', async (e) => {
     const template = `<div class="card h-100">
                        <div class="single-post post-style-1">
 
-                        <div class="blog-image"><img src="${e.preview}" alt="Blog Image"></div>
+                        <div class="blog-image"><img src="${e.post.preview}" alt="Blog Image"></div>
 
-                        <a class="avatar" href="#"><img src="${e.authorAvatar}" alt="Profile Image"></a>
+                        <a class="avatar" href="#"><img src="${e.post.authorAvatar}" alt="Profile Image"></a>
 
                         <div class="blog-info">
 
-                         <h4 class="title"><a href="single-post/${e._id}"><b>${e.title}</b></a></h4>
+                         <h4 class="title"><a href="single-post/${e.post._id}"><b>${e.post.title}</b></a></h4>
 
                          <ul class="post-footer">
                           <li><a href="#"><i class="ion-heart"></i>57</a></li>
-                          <li><a href="#"><i class="ion-chatbubble"></i>${e.commentAmt}</a></li>
+                          <li><a href="#"><i class="ion-chatbubble"></i>${e.amt}</a></li>
                           <li><a href="#"><i class="ion-eye"></i>138</a></li>
                          </ul>
 
@@ -38,6 +38,5 @@ load.addEventListener('click', async (e) => {
     div.innerHTML = template;
     addPostArea.appendChild(div);
   });
-
 
 });

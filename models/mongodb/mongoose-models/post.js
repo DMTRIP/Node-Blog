@@ -7,13 +7,15 @@ const postSchema = Schema({
   _id: { type: Schema.Types.ObjectId, required: true },
   // id user which send post
   author: { type: Schema.Types.ObjectId, required: true, ref: 'User' },
+  authorAvatar: String,
+  // post view
   title: String,
   body: { type: String, maxLength: 40000 },
-  // category tags for post
+  // other data
   tags: [String],
   preview: { type: String, default: '/uploads/default-images/postdefault.jpeg' },
+  views: { type: Number, default: 0 },
   comments: [{ type: Schema.Types.ObjectId, ref: 'Comment' }],
-  authorAvatar: String,
   created: { type: String, default: parse.date() },
 });
 

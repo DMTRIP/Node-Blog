@@ -27,7 +27,7 @@ load.addEventListener('click', async (e) => {
                          <ul class="post-footer">
                           <li><a href="#"><i class="ion-heart"></i>57</a></li>
                           <li><a href="#"><i class="ion-chatbubble"></i>${e.comments.length}</a></li>
-                          <li><a href="#"><i class="ion-eye"></i>138</a></li>
+                          <li><a href="#"><i class="ion-eye"></i>e.views</a></li>
                          </ul>
 
                         </div><!-- blog-info -->

@@ -20,3 +20,9 @@ exports.delete = id => Post.remove({ _id: ObjectId(id) }).exec();
 exports.allPostWithCommentPopulate = () => Post.find().populate('comments');
 
 exports.allUsersPostWithCommentPopulate = id => Post.find({ author: id }).populate('comments');
+
+exports.incrementPostViewById = async (id) => {
+  const post = await Post.findById(id);
+  post.views += 1;
+  post.save();
+};

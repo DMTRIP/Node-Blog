@@ -52,6 +52,9 @@ exports.user_post_list_get = async (req, res) => {
 exports.single_post = async (req, res) => {
   // post id
   const { id } = req.params;
+
+  Post.incrementPostViewById(id);
+
   // the post
   const post = await Post.findOneById(id);
   // post's comments

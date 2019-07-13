@@ -2,10 +2,14 @@ const { Schema } = require('mongoose');
 const mongoose = require('mongoose');
 // дополнительная провека на уникальность значения поля
 const uniqueValidator = require('mongoose-unique-validator');
+const parse = require('../../../parse');
+
 
 const userSchema = new Schema({
   _id: Schema.Types.ObjectId,
-  name: { type: String, required: true, minLength: 3, maxLength: 40 },
+  name: {
+    type: String, required: true, minLength: 3, maxLength: 40,
+  },
   surname: String,
   age: Number,
   email: {
@@ -24,6 +28,8 @@ const userSchema = new Schema({
   // array for populate
   comments: [{ type: Schema.Types.ObjectId, ref: 'Comment' }],
   posts: [{ type: Schema.Types.ObjectId, ref: 'Post' }],
+
+  created: { type: String, default: parse.date() },
 });
 
 userSchema.plugin(uniqueValidator);

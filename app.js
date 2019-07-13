@@ -72,7 +72,7 @@ const auth = (req, res, next) => {
 };
 
 app.use('/', publicRoutes);
-app.use('/blog', auth, blogRoute);
+app.use('/blog', blogRoute);
 
 app.listen(port, () => {
   console.log(`App is running on port: ${port}`);

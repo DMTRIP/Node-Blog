@@ -49,8 +49,11 @@ router.get('/post/create', postController.create_post_get);
 // Post request to create post in Mongo
 router.post('/post/create', upload.single('postImage'), postController.create_post_post);
 
-// Get user's posts page
-router.get('/my-post', postController.user_post_list);
+// Get users posts page
+router.get('/my-post', postController.user_post_list_page_get);
+
+// GET users post by id
+router.get('/my-post/page/:num', postController.user_post_list_get);
 
 // Get single post page
 router.get('/post/:id', postController.single_post);
@@ -63,11 +66,16 @@ router.delete('/post/:id', postController.delete_post_delete);
 
 // / COMMENT ROUTES ///
 
+// POST create post
 router.post('/post/comment/create', commentController.comment_post_create_post);
 
+// GET comment by id
 router.get('/post/comment/:id', commentController.comment_getOne_get);
 
-/// USER ROUTS ///
+// GET comment page for post
+router.get('/post/:id/comment/page/:num', commentController.comment_page_get);
+
+  /// USER ROUTS ///
 
 router.get('/user/:id', userControler.get_one_user_get);
 
@@ -78,4 +86,5 @@ router.get('/test', (req, res) => {
       res.send(doc);
     });
 });
+
 module.exports = router;

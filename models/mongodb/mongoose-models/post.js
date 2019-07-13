@@ -1,6 +1,8 @@
 const { Schema } = require('mongoose');
 const mongoose = require('mongoose');
 
+const parse = require('../../../parse');
+
 const postSchema = Schema({
   _id: { type: Schema.Types.ObjectId, required: true },
   // id user which send post
@@ -12,7 +14,7 @@ const postSchema = Schema({
   preview: { type: String, default: '/uploads/default-images/postdefault.jpeg' },
   comments: [{ type: Schema.Types.ObjectId, ref: 'Comment' }],
   authorAvatar: String,
-  created: { type: Date, default: Date().toLocaleString('en-US', { hour12: false }) },
+  created: { type: String, default: parse.date() },
 });
 
 const Post = mongoose.model('Post', postSchema);

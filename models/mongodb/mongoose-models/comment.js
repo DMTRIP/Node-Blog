@@ -1,5 +1,6 @@
 const { Schema } = require('mongoose');
 const mongoose = require('mongoose');
+const parse = require('../../../parse');
 
 const commentSchema = Schema({
   _id: Schema.Types.ObjectId,
@@ -18,7 +19,7 @@ const commentSchema = Schema({
   authorAvatar: String,
   authorName: String,
 
-  created: { type: Date, default: Date.now() },
+  created: { type: String, default: parse.date() },
 });
 
 const Comment = mongoose.model('Comment', commentSchema);

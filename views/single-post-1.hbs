@@ -50,7 +50,7 @@
             <li><a href="/blog">Blog</a></li>
             <li>Post <i class="fa fa-angle-down"></i>
              <ul>
-              <li><a href="/create-post">Add post</a></li>
+              <li><a href="/blog/post/create">Add post</a></li>
               <li><a href="/my-posts">My posts </a></li>
               <li><a href="/post-on-approve">Post on approve</a></li>
              </ul>
@@ -107,7 +107,7 @@
 
 								<div class="middle-area">
 									<a class="name" href="#"><b>{{post.authorName}}</b></a>
-									<h6 class="date">on Sep 29, 2017 at 9:48 am</h6>
+									<h6 class="date">{{post.created}}</h6>
 								</div>
 
 							</div><!-- post-info -->
@@ -295,7 +295,7 @@
 			<h4><b>POST COMMENT</b></h4>
 			<div class="row">
 
-				<div class="col-lg-8 col-md-12">
+				<div class="col-lg-8 col-md-12 comment-loading">
 					<div class="comment-form">
 						<form action="#">
 							<div class="row">
@@ -327,7 +327,7 @@
 
                  </div>
 
-                 {{#each_limit comments 3}}
+                 {{#each_limit comments 10}}
 					<div class="commnets-area">
 
 						<div class="comment">

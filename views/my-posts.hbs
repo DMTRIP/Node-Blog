@@ -44,8 +44,8 @@
       <li><a href="/blog">Blog</a></li>
       <li>Post <i class="fa fa-angle-down"></i>
        <ul>
-        <li><a href="/create-post">Add post</a></li>
-        <li><a href="/my-posts">My posts </a></li>
+        <li><a href="/blog/post/create">Add post</a></li>
+        <li><a href="/blog/my-post">My posts </a></li>
         <li><a href="/post-on-approve">Post on approve</a></li>
        </ul>
       </li>
@@ -81,7 +81,7 @@
 	<section class="blog-area section">
 		<div class="container">
 			<div class="row add-post">
-             {{#each post}}
+             {{#each_limit post 10}}
               <div class="col-lg-4 col-md-6">
 
 
@@ -121,7 +121,7 @@
                      </div><!-- col-lg-4 col-md-6 -->
              {{else}}
               <h1>no post was found</h1>
-             {{/each}}
+             {{/each_limit}}
 
 			</div><!-- row -->
 
@@ -197,6 +197,9 @@
 	<script src="/bona/common-js/bootstrap.js"></script>
 
 	<script src="/bona/common-js/scripts.js"></script>
+
+	<script src="/bona/common-js/my-post-main.js"></script>
+
 
 
 

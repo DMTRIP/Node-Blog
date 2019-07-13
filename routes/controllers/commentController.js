@@ -23,3 +23,26 @@ exports.comment_getOne_get = async (req, res) => {
   console.log(comment);
   res.status(200).json({ comment });
 };
+
+// return 10 comments for certain post
+exports.comment_page_get = async (req, res) => {
+  const { id, num } = req.params;
+
+  const comments = await Comment.findByPostId(id);
+  if (!comments) res.status(404).json({ massage: `comment for post: ${id} not found` });
+
+  // ten posts
+  const page = [];
+
+  for (let i = num * 10; i < (num * 10) + 10; i++) {
+    console.log(comments[i]);
+    if (comments[i] !== undefined) {
+      page.push(comments[i]);
+    }
+  }
+
+  page.reverse();
+
+  console.log(page);
+  res.status(200).json({ page });
+};

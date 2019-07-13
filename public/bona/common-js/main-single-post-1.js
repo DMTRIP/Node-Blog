@@ -1,5 +1,5 @@
 const submit = document.querySelector('.post-comment');
-const commentArr = [];
+const commentHtmlArr = [];
 
 // quick display comment with fetch without reload
 submit.addEventListener('click', async (e) => {
@@ -67,18 +67,17 @@ submit.addEventListener('click', async (e) => {
 
 							<p>${massage}</p>
 
-						</div> 
-                 </div>
-`;
+						</div> </div>`;
 
       div.innerHTML = template;
 
-      commentArr.push(div);
+      commentHtmlArr.push(div);
       const div2 = document.createElement('div');
-      console.log(commentArr.length);
+      console.log(commentHtmlArr.length);
       commentArea.innerHTML = '';
-      commentArr.reverse();
-      commentArr.map((e) => {
+      commentHtmlArr.reverse();
+
+      commentHtmlArr.map((e) => {
         commentArea.appendChild(e);
       });
     }
@@ -89,6 +88,53 @@ submit.addEventListener('click', async (e) => {
 
 // more comments btn
 const moreComments = document.querySelector('.more-comment-btn');
-moreComments.addEventListener('click', e => {
+
+moreComments.addEventListener('click', async e => {
+  const massageInput = document.querySelector('.text-area-messge');
+  const postId = massageInput.getAttribute('id');
+  const appendPlace = document.querySelector('.comment-loading');
+  const commentRes = await fetch(`/blog/post/${postId}/comment/page/1`);
+  const comment = await commentRes.json();
+  console.log(comment);
+  if(comment.page.length === 0) return;
+
+
+  comment.page.map((e) => {
+    const div = document.createElement('div');
+    const template = `<div class="commnets-area new-comment ">
+                            <div class="comment temp-comment">
+
+							<div class="post-info">
+
+								<div class="left-area">
+									<a class="avatar" href="#"><img src="${e.authorAvatar}" alt="Profile Image"></a>
+								</div>
+
+								<div class="middle-area">
+									<a class="name" href="#"><b>${e.authorName}</b></a>
+									<h6 class="date">${e.created}</h6>
+								</div>
+
+							</div><!-- post-info -->
+
+							<p>${e.massage}</p>
+
+						</div> 
+                     </div>`;
+
+    div.innerHTML = template;
+    // hide more-comment-btn
+    document.querySelector('.more-comment-btn').style.display = 'none';
+    appendPlace.appendChild(div);
+  });
+  const p = document.createElement('p');
+  p.innerHTML = `<b> VIEW MORE COMMENTS </b>`;
+  p.classList.add('more-comment-btn');
+  appendPlace.appendChild(p);
+
+
+
+
+
 
 });

@@ -2,7 +2,7 @@ const load = document.querySelector('.load-more-btn');
 const addPostArea = document.querySelector('.add-post');
 let pageCount = 1;
 load.addEventListener('click', async (e) => {
-  const res = await fetch(`/user/:id/post/page${pageCount}`);
+  const res = await fetch(`/blog/my-post/page/${pageCount}`);
 
   if (res.status !== 200) return;
   pageCount++;
@@ -14,6 +14,18 @@ load.addEventListener('click', async (e) => {
   page.map((e) => {
     const div = document.createElement('div');
     const template = `<div class="card h-100">
+                      <div class="my-post-button" style="text-align: center; margin-top:30px;">
+                        <form style="display: flex" action="#">
+                        <button class="icon-btn add-btn">
+                         <div class="add-icon"></div>
+                         <div class="btn-txt">Edit</div>
+                        </button>
+                        <button class="icon-btn add-btn">
+                         <div class="btn-txt">Remove</div>
+                        </button>
+                        </form>
+                       </div>
+                       
                        <div class="single-post post-style-1">
 
                         <div class="blog-image"><img src="${e.preview}" alt="Blog Image"></div>

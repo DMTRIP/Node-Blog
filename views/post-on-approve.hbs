@@ -22,7 +22,10 @@
 	<link href="/bona/layout-1/css/styles.css" rel="stylesheet">
 
 	<link href="/bona/layout-1/css/responsive.css" rel="stylesheet">
- <link href="/bona/common-css/custom-header-menu.css" rel="stylesheet">
+
+    <link href="/bona/common-css/custom-header-menu.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="/bona/common-css/approve-buttons.css">
 
 </head>
 <body >
@@ -41,12 +44,12 @@
      </div>
      <ul>
       <li><a href="/">Home</a></li>
-      <li><a href="/bona">Blog</a></li>
+      <li><a href="/blog">Blog</a></li>
       <li>Post <i class="fa fa-angle-down"></i>
        <ul>
         <li><a href="/blog/post/create">Add post</a></li>
         <li><a href="/blog/my-post">My posts </a></li>
-        <li><a href="/blog/approve/post">Post on approve</a></li>
+        <li><a href="/post-on-approve">Post on approve</a></li>
        </ul>
       </li>
       <li>Me <i class="fa fa-angle-down"></i>
@@ -86,10 +89,18 @@
 
 	<section class="blog-area section">
 		<div class="container">
+
 			<div class="row add-post">
              {{#each_limit post 10}}
               <div class="col-lg-4 col-md-6">
                       <div class="card h-100">
+                       {{#if ../approver}}
+                        <div class="d-flex approve-buttons" id="{{_id}}">
+                         <p class=" public-btn button mr-2 mb-2">Public</p>
+                         <p class=" button mb-2">Cancel</p>
+                        </div>
+
+                       {{/if}}
                        <div class="single-post post-style-1">
 
                         <div class="blog-image"><img src="{{preview}}" alt="Blog Image"></div>
@@ -100,11 +111,11 @@
 
                          <h4 class="title"><a href="/blog/post/{{_id}}"><b>{{title}}</b></a></h4>
 
-                         <ul class="post-footer">
-                          <li><a href="#"><i class="ion-heart"></i>57</a></li>
-                          <li><a href="#"><i class="ion-chatbubble"></i>{{comments.length}}</a></li>
-                          <li><a href="#"><i class="ion-eye"></i>{{views}}</a></li>
-                         </ul>
+                         <!--<ul class="post-footer">-->
+                          <!--<li><a href="#"><i class="ion-heart"></i>57</a></li>-->
+                          <!--<li><a href="#"><i class="ion-chatbubble"></i>{{comments.length}}</a></li>-->
+                          <!--<li><a href="#"><i class="ion-eye"></i>{{views}}</a></li>-->
+                         <!--</ul>-->
 
                         </div><!-- blog-info -->
                        </div><!-- single-post -->
@@ -190,6 +201,9 @@
 	<script src="/bona/common-js/scripts.js"></script>
 
 	<script src="/bona/common-js/blog-main.js"></script>
+
+	<script src="/bona/common-js/approve.js"></script>
+
 
 
 </body>

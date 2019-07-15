@@ -64,6 +64,21 @@ router.get('/post/page/:num', postController.post_page_get);
 // Delete one post
 router.delete('/post/:id', postController.delete_post_delete);
 
+/// APPROVE POST ///
+
+// Create post on approve
+router.post('/approve/post/create', postController.create_post_on_approve_post);
+
+// Display user's post on approve page
+router.get('/approve/post', postController.user_post_on_approve_page_get);
+
+// Display post on approve for approvers
+router.get('/for-approve/post', postController.post_for_approver_page_get);
+
+// Public post button
+router.post('/for-approve/post/:id/public', postController.approve_public_post_post);
+
+
 // / COMMENT ROUTES ///
 
 // POST create post

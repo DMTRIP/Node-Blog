@@ -1,13 +1,15 @@
 const mongoose = require('mongoose');
+// MongoDB handle models
 const Post = require('../../models/mongodb/post');
 const Comment = require('../../models/mongodb/comment');
 const User = require('../../models/mongodb/user');
+
 const parse = require('../../parse');
 
 // Display list of all posts
 exports.post_list = async (req, res) => {
   const post = await Post.allPostWithCommentPopulate();
-  if(post === []) res.status(404).json({massage: 'post not found'});
+  if (post === []) res.status(404).json({ massage: 'post not found' });
 
   post.reverse();
 
@@ -31,7 +33,7 @@ exports.user_post_list_get = async (req, res) => {
   const { id } = req.cookies;
 
   const post = await Post.allUsersPostWithCommentPopulate(id);
-  if(!post) res.status(404).json({ massage: 'page not found' });
+  if (!post) res.status(404).json({ massage: 'page not found' });
 
   // ten posts
   const page = [];
@@ -53,10 +55,12 @@ exports.single_post = async (req, res) => {
   // post id
   const { id } = req.params;
 
+  // add 1 to post views
   Post.incrementPostViewById(id);
 
   // the post
   const post = await Post.findOneById(id);
+
   // post's comments
   const postId = String(post._id);
 
@@ -89,7 +93,7 @@ exports.create_post_post = async (req, res) => {
   let previewPath;
   if (req.body.path) {
     previewPath = req.file.path ? req.file.path : '/uploads/default-images/postdefault.jpeg';
-  };
+  }
   console.log(parse.date());
   // data post model
   const post = {
@@ -103,7 +107,7 @@ exports.create_post_post = async (req, res) => {
 
   // create post
   Post.create(id, post)
-    .catch(err => {
+    .catch((err) => {
       console.log(err);
       return res.status(500);
     });
@@ -129,8 +133,8 @@ exports.delete_post_delete = async (req, res) => {
 exports.post_page_get = async (req, res) => {
   const { num } = req.params;
 
-  const post = await Post.allPostWithCommentPopulate()
-    if(!post) res.status(404).json({ massage: 'page not found' });
+  const post = await Post.allPostWithCommentPopulate();
+  if (!post) res.status(404).json({ massage: 'page not found' });
 
   // ten posts
   const page = [];
@@ -148,3 +152,71 @@ exports.post_page_get = async (req, res) => {
   res.status(200).json({ page });
 };
 
+// / APPROVE POST ///
+
+// Display post page  for approve
+exports.post_for_approver_page_get = async (req, res) => {
+  const { id } = req.cookies;
+  const user = await User.findOneById(id);
+
+  if(user.type !== 'approver') return res.redirect('/blog');
+
+  const post = await Post.allApprovePost();
+  if (post === []) res.status(404).json({ massage: 'post not found' });
+
+  post.reverse();
+
+  res.render('post-on-approve', { post, approver: true });
+};
+
+// Display user's post on approve
+exports.user_post_on_approve_page_get = async (req, res) => {
+  const { id } = req.cookies;
+  const post = await Post.allApprovePostByAuthorId(id);
+  if (post === []) res.status(404).json({ massage: 'post not found' });
+
+  post.reverse();
+
+  res.render('post-on-approve', { post });
+};
+
+// create post and put it in approve post collection
+exports.create_post_on_approve_post = async (req, res) => {
+  // user id
+  const { id } = req.cookies;
+  const user = await User.findOneById(id);
+
+  // image for post
+  let previewPath;
+  if (req.body.path) {
+    previewPath = req.file.path ? req.file.path : '/uploads/default-images/postdefault.jpeg';
+  }
+
+  // data post model
+  const post = {
+    _id: new mongoose.Types.ObjectId(),
+    // id user which send post
+    author: id,
+    authorAvatar: user.avatar,
+    ...req.body,
+    preview: previewPath,
+  };
+
+  // create post
+  Post.createPostOnApprove(id, post)
+    .catch((err) => {
+      console.log(err);
+      return res.status(500);
+    });
+
+  console.log(post);
+
+  res.status(201).send();
+};
+
+// Button publick post
+exports.approve_public_post_post = async (req, res) => {
+  const { id } = req.params;
+  const post = await Post.approvePublicPost(id);
+  res.status(200).send();
+};

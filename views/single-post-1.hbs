@@ -58,7 +58,7 @@
             <li>Me <i class="fa fa-angle-down"></i>
              <ul>
               <li>My profile</li>
-              <li><a href="/user/log-out">Log out</a></li>
+              <li><a href="/log-out">Log out</a></li>
              </ul>
             </li>
             <li>Contact</li>
@@ -120,11 +120,7 @@
 
 							<h3 class="title"><a href="#"><b>{{post.title}}</b></a></h3>
 
-							<p class="para">{{{firsDiscripton}}}</p>
-
-							<!--<div class="post-image"><img src="{{post.preview}}" alt="Blog Image"></div>-->
-
-							<p class="para">{{{secondDesription}}}</p>
+							<p class="para">{{{post.body}}}</p>
 
 							<ul class="tags">
 								<li><a href="#">{{post.tags.[0]}}</a></li>

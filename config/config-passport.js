@@ -12,6 +12,7 @@ passport.serializeUser((user, done) => {
 
 passport.deserializeUser((id, done) => {
   console.log('Десериализация: ', id);
+  global.userId = id;
   User.findById(id, (err, user) => {
     done(err, user);
   });

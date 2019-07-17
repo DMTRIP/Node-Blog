@@ -38,6 +38,11 @@ const upload = multer({
   fileFilter,
 });
 
+// router.post('/image', upload.single('postImage'), (req, res) => {
+//   console.log(req.file);
+//   res.status(200).send();
+// });
+
 // / POST ROUTES ///
 
 // Get blog page
@@ -47,7 +52,7 @@ router.get('/', postController.post_list);
 router.get('/post/create', postController.create_post_get);
 
 // Post request to create post in Mongo
-router.post('/post/create', upload.single('postImage'), postController.create_post_post);
+router.post('/post/create', postController.create_post_post);
 
 // Get users posts page
 router.get('/my-post', postController.user_post_list_page_get);

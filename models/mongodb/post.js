@@ -12,7 +12,27 @@ exports.findOneById = async id => await Post.findById(id);
 
 exports.findPostByAuthor = async id => await Post.find({ author: id });
 
-exports.create = async (id, data) => await new Post(data).save();
+exports.create = async (req) => {
+  // image for post
+  const previewPath = req.file ? `/${req.file.path}` : '/uploads/default-images/postdefault.jpeg';
+
+  // user id
+  const { id } = req.cookies;
+
+  const post = new Post({
+    _id: new mongoose.Types.ObjectId(),
+    author: id,
+    authorAvatar: '/uploads/default-images/profiledefault.png',
+    preview: previewPath,
+    title: req.body.title,
+    ...req.body,
+  });
+
+  post.save((err, result) => {
+    if (err) console.log(err);
+    console.log(`result: ${result}`);
+  });
+};
 
 exports.update = (id, update) => Post.updateOne({ _id: ObjectId(id) }, update);
 

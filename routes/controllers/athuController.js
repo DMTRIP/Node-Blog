@@ -32,11 +32,13 @@ exports.user_login_post = (req, res, next) => {
     if (err) {
       return next(err);
     }
+    console.log("cookies");
+    console.log(`user: ${user}`);
+    res.cookie('id', user._id, { maxAge: new Date(Date.now() + 100 * 1000 * 10 * 10) });
 
     if (!user) {
       return res.redirect('/');
     }
-    res.cookie('id', user._id, { maxAge: new Date(Date.now() + 100 * 1000 * 10 * 10) });
 
     req.logIn(user, (err) => {
       if (err) {

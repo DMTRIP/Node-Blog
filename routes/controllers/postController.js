@@ -70,11 +70,8 @@ exports.single_post = async (req, res) => {
   //  new comments first
   comments.reverse();
 
-  console.log(comments);
-  const firsDiscripton = body.slice(0, body.length / 2);
-  const secondDesription = body.slice(body.length / 2 + 1);
   res.render('single-post-1', {
-    post, firsDiscripton, secondDesription, comments,
+    post, comments,
   });
 };
 
@@ -85,34 +82,10 @@ exports.create_post_get = async (req, res) => {
 
 // Handle post create on Post
 exports.create_post_post = async (req, res) => {
-  // user id
-  const { id } = req.cookies;
-  const user = await User.findOneById(id);
-
-  // image for post
-  let previewPath;
-  if (req.body.path) {
-    previewPath = req.file.path ? req.file.path : '/uploads/default-images/postdefault.jpeg';
-  }
-  console.log(parse.date());
-  // data post model
-  const post = {
-    _id: new mongoose.Types.ObjectId(),
-    // id user which send post
-    author: id,
-    authorAvatar: user.avatar,
-    ...req.body,
-    preview: previewPath,
-  };
+  console.log(`req file: ${req}`);
 
   // create post
-  Post.create(id, post)
-    .catch((err) => {
-      console.log(err);
-      return res.status(500);
-    });
-
-  console.log(post);
+  Post.create(req);
 
   res.status(201).send();
 };
@@ -157,9 +130,10 @@ exports.post_page_get = async (req, res) => {
 // Display post page  for approve
 exports.post_for_approver_page_get = async (req, res) => {
   const { id } = req.cookies;
+  console.log(id);
   const user = await User.findOneById(id);
 
-  if(user.type !== 'approver') return res.redirect('/blog');
+  if (user.type !== 'approver') return res.redirect('/blog');
 
   const post = await Post.allApprovePost();
   if (post === []) res.status(404).json({ massage: 'post not found' });
@@ -191,6 +165,7 @@ exports.create_post_on_approve_post = async (req, res) => {
   if (req.body.path) {
     previewPath = req.file.path ? req.file.path : '/uploads/default-images/postdefault.jpeg';
   }
+  console.log(req.body);
 
   // data post model
   const post = {
@@ -198,6 +173,7 @@ exports.create_post_on_approve_post = async (req, res) => {
     // id user which send post
     author: id,
     authorAvatar: user.avatar,
+    title: req.body.title,
     ...req.body,
     preview: previewPath,
   };

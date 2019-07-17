@@ -10,6 +10,8 @@ exports.comment_post_create_post = async (req, res) => {
 
   const authorId = req.cookies.id;
 
+  console.log(authorId);
+
   const commentId = await Comment.createToPost(id, authorId, massage);
 
   res.status(201).json({ comment: commentId });

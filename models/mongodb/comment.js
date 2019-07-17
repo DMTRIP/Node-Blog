@@ -20,7 +20,7 @@ exports.delete = id => Comment.deleteOne({ _id: ObjectId(id) });
 
 exports.createToPost = async (postId, authorId, massage) => {
   const post = await Post.findById(postId).exec();
-  const user = await User.findById(authorId).exec();
+  const user = await User.findById(global.userId).exec();
   // object data template for mongoose comment schema
   const commentData = {
     _id: new mongoose.Types.ObjectId(),
@@ -34,14 +34,6 @@ exports.createToPost = async (postId, authorId, massage) => {
   // create comment
   const comment = new Comment(commentData);
   comment.save((err) => { if (err) return err; });
-
-  // push comment's id to post.comments arr
-  post.comments.push(comment._id);
-  post.save((err) => { if (err) return err; });
-
-  // push comment's id to user.comments arr
-  user.comments.push(comment._id);
-  user.save((err) => { if (err) return err; });
 
   return comment._id;
 };

@@ -6,6 +6,7 @@ const expressSession = require('express-session');
 const FileStore = require('session-file-store')(expressSession);
 const passport = require('passport');
 const cookieParser = require('cookie-parser');
+const flash = require('connect-flash');
 
 require('./config/mongodb-config');
 // mongoose schemas
@@ -61,7 +62,7 @@ require('./config/config-passport');
 
 app.use(passport.initialize());
 app.use(passport.session());
-
+app.use(flash());
 
 const auth = (req, res, next) => {
   if (req.isAuthenticated()) {
@@ -72,7 +73,8 @@ const auth = (req, res, next) => {
 };
 
 app.use('/', publicRoutes);
-app.use('/blog', blogRoute);
+app.use('/blog', auth, blogRoute);
+
 
 app.listen(port, () => {
   console.log(`App is running on port: ${port}`);

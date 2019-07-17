@@ -16,18 +16,15 @@ const deleteYes = document.querySelector('.delete-yes');
 class ParseData {
   title(data) {
     // checking if there is any <h1> <h2> etc tags
-    const isTag = data.search('/<h.>/');
-    if (isTag) {
-      // choose tag with the smallest digit
-      const smallest = Math.min.apply(null, data.match(/\d+/g));
-      const firstIndex = data.indexOf(`<h${smallest}>`);
-      const lastIndex = data.indexOf(`</h${smallest}>`);
-      return data.slice(firstIndex, lastIndex);
-    } else  {
-      return '';
-    }
+    // const isTag = data.search('/<h.>/');
+    // if (isTag) {
+    //   // choose tag with the smallest digit
+    //   const smallest = Math.min.apply(null, data.match(/\d+/g));
+    //   const firstIndex = data.indexOf(`<h${smallest}>`);
+    //   const lastIndex = data.indexOf(`</h${smallest}>`);
+      return data.slice(4, 58);
+    //}
   }
-
   postImage(data) {
     // take first image src address for main post page
     const src = data.match(/src="(.*?)\"/);
@@ -35,36 +32,35 @@ class ParseData {
   }
 }
 const parse = new ParseData();
-// send data to server and clear textarea
+//send data to server and clear textarea
 postYes.addEventListener('click', async (e) => {
   // cancel submit stay on the page
   e.preventDefault();
 
   const data = CKEDITOR.instances.editor1.getData();
-  console.log(data);
+
   const title = parse.title(data);
   // url
-  const postImage = parse.postImage(data);
-  // document.cookie = 'id=5d1e35c66449bd7317ca971d';
-  // console.log(document.cookie);
+  document.cookie = 'id=5d1e35c66449bd7317ca971d';
+  console.log(document.cookie);
 
-  const res = await fetch('/blog/approve/post/create', {
+  const res = await fetch('/blog//approve/post/create', {
     method: 'POST',
     headers: {
-      Accept: 'application/json, text/plain, */*',
+      Accept: 'application/json, text/plain, multipart/form-data, */*',
       'Content-type': 'application/json',
     },
-    body: JSON.stringify({ title, postImage, body: data }),
+    body: JSON.stringify({ title, body: data }),
   });
 
-  if(res.status === 201) {
+  if (res.status === 201) {
     alert('post was created');
     CKupdate();
   } else {
     alert('post was not created try again');
   }
-
 });
+
 
 // clear textarea
 deleteYes.addEventListener('click', (e) => {

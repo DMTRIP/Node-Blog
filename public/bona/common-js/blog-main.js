@@ -2,7 +2,7 @@ const load = document.querySelector('.load-more-btn');
 const addPostArea = document.querySelector('.add-post');
 let pageCount = 1;
 load.addEventListener('click', async (e) => {
-  const res = await fetch(`/user/:id/post/page${pageCount}`);
+  const res = await fetch(`/blog/post/page/${pageCount}`);
 
   if (res.status !== 200) return;
   pageCount++;

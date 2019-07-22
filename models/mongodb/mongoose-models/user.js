@@ -8,7 +8,7 @@ const parse = require('../../../parse');
 const userSchema = new Schema({
   _id: Schema.Types.ObjectId,
   name: {
-    type: String, required: true, minLength: 3, maxLength: 40,
+    type: String, required: true, minLength: 3, maxLength: 40, match: [/^[\w'\-,.][^0-9_!¡?÷?¿\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$/],
   },
   surname: String,
   age: Number,
@@ -20,7 +20,9 @@ const userSchema = new Schema({
       /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/,
     ],
   },
-  password: { type: String, required: true, minLength: 8 },
+  password: {
+    type: String, required: true, minLength: 8, match: [/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,100})/],
+  },
   // type can be user or admin
   type: { type: String, default: 'user' },
   avatar: { type: String },

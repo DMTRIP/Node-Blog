@@ -8,7 +8,9 @@ module.exports = {
       userName: 'Bot',
       password: 'Bot228',
       dbName: 'node-blog',
-    }
-  }
+    },
+  },
+
+  jwtSecret: 'ASicretStringForJWT',
 
 };

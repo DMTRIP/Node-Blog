@@ -4,6 +4,7 @@ const Post = require('../models/mongodb/mongoose-models/post');
 const User = require('../models/mongodb/mongoose-models/user');
 const Comment = require('../models/mongodb/mongoose-models/comment');
 
+const auth = require('./middleware/auth');
 
 const router = express.Router();
 const postController = require('./controllers/postController');
@@ -46,7 +47,7 @@ const upload = multer({
 // / POST ROUTES ///
 
 // Get blog page
-router.get('/', postController.post_list);
+router.get('/', auth, postController.post_list);
 
 // Get create post page
 router.get('/post/create', postController.create_post_get);
@@ -101,10 +102,12 @@ router.get('/user/:id', userControler.get_one_user_get);
 
 router.get('/test', (req, res) => {
   Post.find()
-    .populate('users')
+    .populate('comments')
     .exec((err, doc) => {
       res.send(doc);
     });
 });
+
+
 
 module.exports = router;

@@ -38,7 +38,7 @@ exports.update = (id, update) => Post.updateOne({ _id: ObjectId(id) }, update);
 
 exports.delete = id => Post.remove({ _id: ObjectId(id) }).exec();
 
-exports.allPostWithCommentPopulate = () => Post.find().populate('comments');
+exports.allPostWithCommentPopulate = () => Post.find().populate('comments').exec();
 
 exports.allUsersPostWithCommentPopulate = id => Post.find({ author: id }).populate('comments');
 

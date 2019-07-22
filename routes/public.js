@@ -8,14 +8,9 @@ router.get('/', (req, res) => {
   res.redirect('/blog');
 });
 
-// GET sign up page
-router.get('/registration', authController.registration_get);
-
-// GET login page
-router.get('/login', authController.login_get);
 
 // POST Sign Up (register) user account
-router.post('/sign-up', authController.user_signUp_post);
+router.post('/registration', authController.user_signUp_post);
 
 // POST user login (check user data in login form)
 router.post('/login', authController.user_login_post);

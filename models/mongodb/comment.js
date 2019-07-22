@@ -24,7 +24,7 @@ exports.createToPost = async (postId, authorId, massage) => {
   // object data template for mongoose comment schema
   const commentData = {
     _id: new mongoose.Types.ObjectId(),
-    postId,
+    postId: post._id,
     authorId,
     massage,
     authorAvatar: user.avatar,

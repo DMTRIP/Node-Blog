@@ -1,6 +1,6 @@
 module.exports = {
   app:{
-    port: parseInt(process.env.DEV_APP_PORT) || 3000,
+    port: parseInt(process.env.DEV_APP_PORT) || 5000,
   },
 
   db: {

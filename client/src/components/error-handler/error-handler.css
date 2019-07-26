@@ -1,0 +1,23 @@
+
+.error-handler {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    font-family: 'KG HAPPY Solid';
+    color: #498BF9;
+}
+
+.error-handler span {
+    font-size: 3rem;
+}
+
+.error-handler span:first-child {
+    font-size: 5rem;
+    font-weight: bold;
+    color: red;
+}
+
+.error-handler span:last-child {
+    margin-bottom: 1rem;
+}

@@ -1,0 +1,109 @@
+:root {
+    --primary-color: coral;
+    --secondary-color: chocolate;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+header{
+    overflow: inherit;
+}
+
+.nice-text {
+    font-family: 'KG HAPPY';
+    color: #000 !important;
+}
+
+#navbar ul { list-style: none; }
+
+#navbar ul li {
+    position: relative;
+    display: inline-block;
+    padding: 1.5rem;
+    color: #333;
+    background: #fff;
+}
+
+#navbar ul li a {
+    color: #333;
+    text-decoration: none;
+}
+
+/* Hide nested ul by default */
+#navbar ul li ul { display: none; }
+
+#navbar ul li:hover {
+    background: var(--primary-color);
+    color: #fff;
+    cursor: pointer;
+}
+
+#navbar ul li:hover a { color: #fff; }
+
+/* Nested dropdown show */
+#navbar ul li:hover ul {
+    position: absolute;
+    left: 0;
+    display: block;
+    width: 200px;
+    margin-top: 1.5rem;
+}
+
+#navbar ul li:hover ul li {
+    display: block;
+    background: #e7e7e7;
+}
+
+#navbar {
+    width: 50%;
+}
+
+#navbar ul li:hover ul li a { color: #333; }
+
+#navbar ul li:hover ul li:hover {
+    background: #e0e0e0;
+    color: inherit;
+}
+
+#navbar ul li:hover ul li span {
+    float: right;
+    padding: 0.2rem 0.5rem;
+    background: var(--primary-color);
+    color: #fff;
+    font-size: 0.8rem;
+    text-align: center;
+    border-radius: 5px;
+}
+
+#navbar ul li:hover ul li:hover span { background: var(--secondary-color); }
+
+#showcase {
+    display: flex;
+    flex-direction: column;
+    height: 300px;
+    padding: 0 2rem;
+    background: var(--primary-color);
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+#showcase h1 {
+    color: #fff;
+    font-size: 4rem;
+}
+
+
+@media(max-width: 600px) {
+    #navbar ul li { display: block; }
+
+    #navbar ul li:hover ul {
+        position: relative;
+        width: 100%;
+    }
+}
+

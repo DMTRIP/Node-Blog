@@ -5,7 +5,7 @@ const SearchPanel = () => {
   return (
     <div className="src-area">
       <form>
-        <button className="src-btn" type="submit"><i className="ion-ios-search-strong"></i></button>
+        <button className="src-btn" type="submit"><i className="far fa-search"></i></button>
         <input className="src-input" type="text" placeholder="Type of search" />
       </form>
     </div>

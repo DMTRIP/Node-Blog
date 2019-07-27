@@ -7,7 +7,7 @@ import BonaSerice from '../../services/bona-service';
 import UserMassage from '../user-massage';
 
 const bonaSerice = new BonaSerice;
-export default class CreatePost extends Component{
+export default class CreatePostPage extends Component{
 
   state = {
     postData: '',

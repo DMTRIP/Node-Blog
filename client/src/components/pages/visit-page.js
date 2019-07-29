@@ -5,9 +5,11 @@ import Post from '../post';
 import Footer from '../footer';
 import ErrorHandler from '../error-handler';
 
+
 import BonaService from '../../services/bona-service';
 const bonaService = new BonaService();
-export default class VisitPage extends Component{
+
+ class VisitPage extends Component{
 
   state = {
     term: 'some',
@@ -27,4 +29,5 @@ export default class VisitPage extends Component{
      </Fragment>
     )
   }
-};
+}
+export default VisitPage;

@@ -3,9 +3,9 @@ import React, { Fragment } from 'react';
 import './single-post-main.css';
 
 import PostInfo from '../post-info';
-import { withData } from '../hoc-helpers';
 
-const SinglePostMain = (props) => {
+const SinglePostMain = ({ postId }) => {
+  console.log(`id from post main: ${postId}`);
   return (
     <Fragment>
       <div className="col-lg-8 col-md-12 no-right-padding">

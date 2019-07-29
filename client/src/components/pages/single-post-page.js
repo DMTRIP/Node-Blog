@@ -8,7 +8,8 @@ import Sidebar from '../sidebar';
 import RecommendedPost from '../recommended-post';
 import Comment from "../comment";
 
-const SinglePostPage = () => {
+
+const SinglePostPage = ({ postId }) => {
   return (
     <Fragment>
       <Header />
@@ -17,7 +18,7 @@ const SinglePostPage = () => {
       <section className="post-area section">
         <div className="container">
           <div className="row">
-            <SinglePostMain />
+            <SinglePostMain postId={postId} />
             <Sidebar />
           </div>
         </div>

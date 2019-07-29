@@ -2,6 +2,8 @@ import React, {Fragment} from 'react';
 
 import './header.css';
 
+import { Link } from 'react-router-dom';
+
 import logo from '../../images/logo.png';
 import SearchPanel from  '../search-panel';
 
@@ -16,9 +18,8 @@ const Header = () => {
           <li><a href="#">Contact</a></li>
           <li>Blog <i className="fas fa-angle-down"></i>
             <ul>
-              <li><a href="#">My post</a> <span>17 Posts</span></li>
-              <li><a href="#">Favorite</a> <span>23 Posts</span></li>
-              <li><a href="#">Create post</a> <span>23 Posts</span></li>
+              <li><Link to='/my-post'>My post</Link><span>17 Posts</span></li>
+              <li><Link to='/create-post'>Create post</Link> <span>23 Posts</span></li>
             </ul>
           </li>
         </ul>

@@ -37,6 +37,20 @@ router.get('/post', postController.post_all_get);
 
 router.post('/post/create', upload.single('postImage'), postController.post_create_post);
 
+router.get('/post/:id', postController.post_getOne_get);
+
+// user
+router.get('/user/:id', postController.get_user_get);
+
 router.get('/user/:id/post', postController.post_my_post_post);
+
+router.get('/user/post/recommended', postController.post_recommended_get);
+
+
+
+
+
+
+
 
 module.exports = router;

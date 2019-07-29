@@ -14,7 +14,7 @@ header .main-menu > li > a{ height: 60px; line-height: 60px; padding: 0 25px; }
 header .main-menu > li > a:hover{  background: #eee; }
 
 header {
-    margin-bottom: 3rem;
+    margin-bottom: 3rem !important;
 }
 
 header .visible.main-menu{ display: block; }

@@ -6,6 +6,12 @@ const mongoose = require('mongoose');
 
 const { ObjectId } = mongoose.Types;
 
+function randomInteger(min, max) {
+  var rand = min + Math.random() * (max + 1 - min);
+  rand = Math.floor(rand);
+  return rand;
+}
+
 exports.all = async () => await Post.find().exec();
 
 exports.findOneById = async id => await Post.findById(id);
@@ -36,3 +42,14 @@ exports.update = (id, update) => Post.updateOne({ _id: ObjectId(id) }, update);
 exports.delete = id => Post.remove({ _id: ObjectId(id) }).exec();
 
 exports.myPost = async id => await Post.find({ author: id });
+
+exports.recommended = async () => {
+  const post = await Post.find();
+  const recommended = [];
+
+  for (let i = 0; i < 3; i++) {
+    recommended.push(post[randomInteger(1, 4)]);
+  }
+
+  return recommended;
+};

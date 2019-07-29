@@ -1,4 +1,5 @@
 const Post = require('../../models/post');
+const User = require('../../models/user');
 
 exports.post_all_get = async (req, res) => {
   const post = await Post.all();
@@ -20,5 +21,31 @@ exports.post_my_post_post = async (req, res) => {
     res.status(200).json(post);
   } catch (e) {
     res.status(404).json({ msg: 'post not found' });
+  }
+};
+
+exports.post_recommended_get = async (req, res) => {
+  try {
+    const post = await Post.recommended();
+    res.status(200).json(post);
+  } catch (e) {
+    res.status(404).json({ msg: 'recommended post not found' });
+  }
+};
+
+exports.post_getOne_get = async (req, res) => {
+  const post = await Post.findOneById(req.params.id);
+  if(!post) return res.status(404).json('post not found');
+  res.status(200).json(post);
+};
+
+// USER
+
+exports.get_user_get = async (req, res) => {
+  try {
+    const user = await User.findOneById('5d2ed8ae4bd84bfe49e17985');
+    res.status(200).json(user);
+  } catch (e) {
+    res.status(404).json({ msg: 'user not found' });
   }
 };

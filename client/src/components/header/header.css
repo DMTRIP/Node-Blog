@@ -11,6 +11,7 @@
 
 header{
     overflow: inherit;
+    margin-bottom: 0;
 }
 
 .nice-text {

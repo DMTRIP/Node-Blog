@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-
+import withAuth from '../hoc-helpers/withAuth';
 
 import Header from '../header';
 import Ckeditor from '../ckeditor';
@@ -7,7 +7,7 @@ import BonaSerice from '../../services/bona-service';
 import UserMassage from '../user-massage';
 
 const bonaSerice = new BonaSerice;
-export default class CreatePostPage extends Component{
+class CreatePostPage extends Component{
 
   state = {
     postData: '',
@@ -85,3 +85,4 @@ export default class CreatePostPage extends Component{
     )
   }
 };
+export default  withAuth(CreatePostPage);

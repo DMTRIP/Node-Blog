@@ -9,10 +9,11 @@ import RecommendedPost from '../recommended-post';
 import Comment from "../comment";
 
 
-const SinglePostPage = ({ postId }) => {
+const SinglePostPage = ({ postId, isLogin}) => {
+  const Head = isLogin ? <Header /> : null;
   return (
     <Fragment>
-      <Header />
+      { Head }
         <Slider />
 
       <section className="post-area section">

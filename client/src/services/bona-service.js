@@ -21,6 +21,18 @@ export default  class BonaService {
    return await  axios.get(`/api/post/5d36a55e641f232c3456032e`);
  };
 
+ createUser = async (data) => {
+   return await axios.post('/api/sign-up', data);
+ };
+
+ login = async (data) => {
+   return await axios.post('/api/login', data);
+ };
+
+ captchaVereficate = async (captcha) => {
+   return await axios.post('/api/re-captcha', { captcha });
+ };
+
  // send post data to server
  async createPost(data) {
    return await axios.post('/api/post/create',data);

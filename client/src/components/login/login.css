@@ -1,0 +1,181 @@
+.Login h1, input::-webkit-input-placeholder, button {
+    font-family: 'roboto', sans-serif;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+
+.Login h1 {
+    text-align: center;
+    width: 100%;
+    font-size: 18px;
+    background: #18aa8d;
+    color: white;
+    line-height: 150%;
+    border-radius: 3px 3px 0 0;
+    box-shadow: 0 2px 5px 1px rgba(0, 0, 0, 0.2);
+}
+
+.Login {
+    top: 10%;
+    position: fixed;
+    z-index: 20;
+    background: #fff;
+    left: 32%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+    width: 35%;
+    box-shadow: 2px 2px 5px 1px rgba(0, 0, 0, 0.2);
+    padding-bottom: 40px;
+    border-radius: 3px;
+}
+.Login form h1 {
+    box-sizing: border-box;
+    padding: 20px;
+}
+
+.Login input {
+    margin: 1rem 0;
+    width: 80%;
+    display: block;
+    border: none;
+    padding: 1rem 0;
+    border-bottom: solid 1px #1abc9c;
+    -webkit-transition: all 0.3s cubic-bezier(0.64, 0.09, 0.08, 1);
+    transition: all 0.3s cubic-bezier(0.64, 0.09, 0.08, 1);
+    background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0) 96%, #1abc9c 4%);
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 96%, #1abc9c 4%);
+    background-position: -200px 0;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    color: #0e6252;
+}
+.Login input:focus, input:valid {
+    box-shadow: none;
+    outline: none;
+    background-position: 0 0;
+}
+.Login input:focus::-webkit-input-placeholder, input:valid::-webkit-input-placeholder {
+    color: #1abc9c;
+    font-size: 1rem;
+    -webkit-transform: translateY(-20px);
+    transform: translateY(-20px);
+    visibility: visible !important;
+}
+
+.Login button {
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+    border: none;
+    background: #1abc9c;
+    cursor: pointer;
+    border-radius: 3px;
+    padding: 6px;
+    width: 200px;
+    color: white;
+    margin-left: 25px;
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.2);
+}
+.Login button:hover {
+    -webkit-transform: translateY(-3px);
+    -ms-transform: translateY(-3px);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 6px 0 rgba(0, 0, 0, 0.2);
+}
+
+.disable {
+    display: none;
+}
+
+.invalid-input {
+    background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0) 96%, #D8000C 4%) !important;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 96%, #D8000C 4%) !important;
+    border-bottom: 1px solid #D8000C !important;
+}
+
+/*====OVERLAY===*/
+
+.back {
+    position: absolute;
+    top: 2em;
+    right: 2em;
+    z-index: 100;
+    color: #222;
+    text-decoration: none;
+    transition: color .3s;
+}
+.back:hover {
+    color: #aaa;
+}
+
+
+.overlay-trigger {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 840px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+.overlay-trigger button {
+    display: block;
+    margin: 1em;
+    padding: 1em 2.5em;
+    background: #222;
+    border: 1px solid #222;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 16px;
+    text-align: center;
+    cursor: pointer;
+    transition: .2s ease-in-out;
+}
+.overlay-trigger button:hover {
+    background: transparent;
+    color: #222;
+}
+.overlay-close {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: 10;
+    padding: 1em 2.5em;
+    background: #fff;
+    border: 1px solid #fff;
+    border-radius: 4px;
+    color: #222;
+    font-size: 16px;
+    text-align: center;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition: .2s ease-in-out;
+    transform: translate(-50%, -50%);
+}
+.overlay-close.is-open {
+    opacity: 1;
+    visibility: visible;
+}
+.overlay-close:hover {
+    background: transparent;
+    color: #fff;
+}
+
+.overlay01 {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 18;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, .7);
+    opacity: 0;
+    visibility: hidden;
+    transition: .3s linear;
+}
+.overlay01.is-open {
+    opacity: 1;
+    visibility: visible;
+}
+

@@ -1,12 +1,15 @@
 import axios from "axios";
-
+import AuthHelper from '../components/helpers/auth-helper'
+const auth = new AuthHelper();
+const userId = auth.getId();
 export default  class BonaService {
+
  getPosts = async () => {
     return await axios.get('/api/post');
  };
 
  getMyPost = async () => {
-   return await axios.get('/api/user/5d1e35c66449bd7317ca971d/post');
+   return await axios.get(`/api/user/${userId}/post`);
  };
 
  getRecommendedPost = async () => {
@@ -14,7 +17,7 @@ export default  class BonaService {
  };
 
  getUser = async () => {
-   return await axios.get('/api/user/5d2ed8ae4bd84bfe49e17985');
+   return await axios.get(`/api/user/${userId}`);
  };
 
  getPost = async (id) => {
@@ -35,7 +38,7 @@ export default  class BonaService {
 
  // send post data to server
  async createPost(data) {
-   return await axios.post('/api/post/create',data);
+   return await axios.post(`/api/user/${userId}/post/create`,data);
  };
 
 

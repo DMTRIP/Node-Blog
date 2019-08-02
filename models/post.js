@@ -7,7 +7,7 @@ const mongoose = require('mongoose');
 const { ObjectId } = mongoose.Types;
 
 function randomInteger(min, max) {
-  var rand = min + Math.random() * (max + 1 - min);
+  let rand = min + Math.random() * (max + 1 - min);
   rand = Math.floor(rand);
   return rand;
 }
@@ -22,16 +22,15 @@ exports.create = async (req) => {
   // image for post
   const previewPath = req.file ? `/${req.file.path}` : '/uploads/default-images/postdefault.jpeg';
   const { title, body } = req.body;
+  const { id } = req.params;
 
   const post = new Post({
     _id: new mongoose.Types.ObjectId(),
+    author: id,
     authorAvatar: '/uploads/default-images/profiledefault.png',
-    preview: previewPath,
     title,
     body,
-    comments: [1, 2, 3],
-    likes: [1, 2, 3],
-    views: 10,
+    preview: previewPath,
   });
 
   return post.save();

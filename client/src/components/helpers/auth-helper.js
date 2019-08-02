@@ -8,6 +8,14 @@ export default class A {
     localStorage.setItem('jwt', jwt);
   }
 
+  setId(id) {
+    localStorage.setItem('id', id)
+  }
+
+  getId(){
+    return localStorage.getItem('id');
+  }
+
   login = (username, password) => {
     // Get a token from api server using the fetch api
     return this.fetch(`/log-in`, {

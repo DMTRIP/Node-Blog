@@ -5,19 +5,20 @@ const parse = require('../../parse');
 
 const postSchema = Schema({
   _id: { type: Schema.Types.ObjectId, required: true },
+
   // id user which send post
-  // author: { type: Schema.Types.ObjectId, required: true, ref: 'User' },
+  author: { type: Schema.Types.ObjectId, required: true, ref: 'User' },
   authorAvatar: String,
+
   // post view
   title: String,
   body: { type: String, maxLength: 40000 },
   preview: { type: String, default: '/uploads/default-images/postdefault.jpeg' },
-  comments: [],
-  likes: [],
-  views: Number,
-  // comments: [{ type: Schema.Types.ObjectId, ref: 'Comment' }],
-  // likes: [{ type: Schema.Types.ObjectId, ref: 'Likes' }],
-  // views: { type: Number, default: 0 },
+
+  comments: [{ type: Schema.Types.ObjectId, ref: 'Comment' }],
+  likes: [{ type: Schema.Types.ObjectId, ref: 'Likes' }],
+  views: { type: Number, default: 0 },
+
   created: { type: String, default: parse.date() },
 });
 

@@ -3,6 +3,8 @@ const multer = require('multer');
 
 const router = express.Router();
 const postController = require('../controllers/post');
+const auth = require('../middleware/auth');
+const authController = require('../controllers/athu-controller');
 
 
 // take images from request with multer
@@ -35,7 +37,7 @@ const upload = multer({
 
 router.get('/post', postController.post_all_get);
 
-router.post('/post/create', upload.single('postImage'), postController.post_create_post);
+router.post('/user/:id/post/create', upload.single('postImage'), postController.post_create_post);
 
 router.get('/post/:id', postController.post_getOne_get);
 
@@ -46,11 +48,14 @@ router.get('/user/:id/post', postController.post_my_post_post);
 
 router.get('/user/post/recommended', postController.post_recommended_get);
 
+router.post('/login', authController.user_login_post);
+
+router.post('/sign-up', authController.user_signUp_post);
 
 
+// auth
 
-
-
+router.post('/re-captcha', authController.re_captcha_post);
 
 
 module.exports = router;

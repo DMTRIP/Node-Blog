@@ -71,7 +71,8 @@ export default class Login extends Component {
          console.log(res.data.token);
          if (res.status === 200) {
            auth.setJwt(res.data.token);
-           history.push('/');
+           auth.setId(res.data.id);
+           // history.push('/');
          } else {
            this.setState({ loginFail: true });
          }

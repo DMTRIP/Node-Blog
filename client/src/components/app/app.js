@@ -27,15 +27,23 @@ export default class App extends  Component{
 
     return (
       <Router>
-        <Route path='/visit' component={VisitPage}/>
+        <Route path='/visit'
+               render={({ history }) => {
+                if(authHelper.getJwt()) {
+                  history.push('/');
+                } else {
+                  return <VisitPage />
+                }
+               }}/>
           <Route path='/create-post' component={CreatePostPage}/>
           <Route path='/my-post' component={MyPostPage}/>
           <Route path='/single-post/:id'
-          render={({match}) => {
+                 render={({match}) => {
           const { id } = match.params;
           return <SinglePostPage postId={id} />
           }}/>
-          <Route path='/' render={(e) => <h2>Welcome to home page</h2>} exact/>
+          <Route path='/'
+                 render={(e) => <h2>Welcome to home page</h2>} exact/>
     </Router>
     )
   }

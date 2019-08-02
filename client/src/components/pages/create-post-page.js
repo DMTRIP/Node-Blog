@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import withAuth from '../hoc-helpers/withAuth';
+import withAuth from '../hoc-helpers/with-auth';
 
 import Header from '../header';
 import Ckeditor from '../ckeditor';

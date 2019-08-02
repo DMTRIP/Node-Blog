@@ -4,6 +4,9 @@ import VisitPage from '../pages/visit-page';
 import CreatePostPage from '../pages/create-post-page';
 import MyPostPage from '../pages/my-post-page';
 import SinglePostPage from '../pages/single-post-page';
+
+import { withData } from '../hoc-helpers';
+import BonaService from '../../services/bona-service';
 import Login from '../login';
 import { authHelper } from '../helpers';
 
@@ -40,7 +43,9 @@ export default class App extends  Component{
           <Route path='/single-post/:id'
                  render={({match}) => {
           const { id } = match.params;
-          return <SinglePostPage postId={id} />
+          let isLogin = false;
+          if(authHelper.getJwt()) isLogin = true;
+          return <SinglePostPage postId={id} isLogin={isLogin} />
           }}/>
           <Route path='/'
                  render={(e) => <h2>Welcome to home page</h2>} exact/>

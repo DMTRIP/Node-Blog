@@ -1,24 +1,24 @@
-import React, { Fragment } from 'react';
-
-import './single-post-main.css';
+import React, { Fragment, Component } from 'react';
 
 import PostInfo from '../post-info';
+import './single-post-main.css';
 
-const SinglePostMain = ({ postId }) => {
-  console.log(`id from post main: ${postId}`);
+const SinglePostMain  = ({ post })  =>  {
+  const { title, comments, likes, views } = post;
+  console.log(post);
+
   return (
-    <Fragment>
-      <div className="col-lg-8 col-md-12 no-right-padding">
+      <Fragment>
+        <div className="col-lg-8 col-md-12 no-right-padding">
 
-        <div className="main-post">
+          <div className="main-post">
 
-          <div className="blog-post-inner">
+            <div className="blog-post-inner">
               <div className="blog-post-inner">
 
                 <PostInfo />
 
-                <h3 className="title"><a href="#"><b>How Did Van Gogh's Turbulent Mind Depict One of the Most Complex
-                  Concepts in Physics?</b></a></h3>
+                <h3 className="title"><a href="#"><b>{title}</b></a></h3>
 
 
                 <ul className="tags">
@@ -31,9 +31,9 @@ const SinglePostMain = ({ postId }) => {
 
               <div className="post-icons-area">
                 <ul className="post-icons">
-                  <li><a href="#"><i className="ion-heart"></i>57</a></li>
-                  <li><a href="#"><i className="ion-chatbubble"></i>6</a></li>
-                  <li><a href="#"><i className="ion-eye"></i>138</a></li>
+                  <li><a href="#"><i className="ion-heart"></i>{likes.length}</a></li>
+                  <li><a href="#"><i className="ion-chatbubble"></i>{comments.length}</a></li>
+                  <li><a href="#"><i className="ion-eye"></i>{views.length}</a></li>
                 </ul>
 
                 <ul className="icons">
@@ -44,14 +44,15 @@ const SinglePostMain = ({ postId }) => {
                 </ul>
               </div>
 
-            <PostInfo />
+              <PostInfo />
 
+            </div>
           </div>
         </div>
-      </div>
-</Fragment>
+      </Fragment>
 
-  )
+    )
+
 };
 
-export default SinglePostMain;
+      export default SinglePostMain;

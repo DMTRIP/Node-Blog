@@ -41,6 +41,10 @@ router.post('/user/:id/post/create', upload.single('postImage'), postController.
 
 router.get('/post/:id', postController.post_getOne_get);
 
+router.get('/post/page/:num', postController.post_page_get);
+
+router.get('/user/:id/post/page/:num', postController.post_myPost_page_get);
+
 // user
 router.get('/user/:id', postController.get_user_get);
 

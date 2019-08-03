@@ -1,20 +1,19 @@
-import React, { Component, Fragment } from 'react';
+import React, { Fragment } from 'react';
 
 import Header from '../header';
 import Post from '../post';
 import Footer from '../footer';
 import BonaService from '../../services/bona-service';
+const bonaService = new BonaService();
 
-const MyPost = () => {
-  const bonaService = new BonaService();
+const HomePage = () => {
   return (
     <Fragment>
       <Header />
-            <Post getPost={bonaService.myPostPage} loadBtn={true}/>
+      <Post getPost={bonaService.postPage} loadBtn={true} />
       <Footer />
     </Fragment>
   )
 };
 
-export default MyPost;
-
+export default HomePage;

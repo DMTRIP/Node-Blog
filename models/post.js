@@ -42,6 +42,10 @@ exports.delete = id => Post.remove({ _id: ObjectId(id) }).exec();
 
 exports.myPost = async id => await Post.find({ author: id });
 
+exports.page = async num => Post.find({}, {}, { skip: num, limit: 10 });
+
+exports.myPostPage = async (num, id) => Post.find({ author: id }, {}, { skip: num, limit: 10 });
+
 exports.recommended = async () => {
   const post = await Post.find();
   const recommended = [];

@@ -39,6 +39,26 @@ exports.post_getOne_get = async (req, res) => {
   res.status(200).json(post);
 };
 
+exports.post_page_get = async (req, res) => {
+  const { num } = req.params;
+  try {
+    const page = await Post.page(num * 10);
+    res.status(200).json(page);
+  } catch (e) {
+    res.status(404).send();
+  }
+};
+
+exports.post_myPost_page_get = async (req, res) => {
+  const { num, id } = req.params;
+  try {
+    const page = await Post.myPostPage(num * 10, id);
+    res.status(200).json(page);
+  } catch (e) {
+    res.status(404).send();
+  }
+};
+
 // USER
 
 exports.get_user_get = async (req, res) => {

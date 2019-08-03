@@ -69,7 +69,7 @@ const bonaService = new BonaService();
         <VisitHeader onLogin={this.onLogin} onSignUp={this.onSignUp}/>
        {loginForm}
        {sighUpFrom}
-              <Post getPost={bonaService.getPosts} />
+              <Post getPost={bonaService.postPage}  loadBtn={true} />
               { error }
         <Footer />
      </Fragment>

@@ -41,7 +41,7 @@ export default class SinglePostPage extends Component {
     return (
       <Fragment>
         { Head }
-        <Slider />
+        <Slider img={post.preview}/>
 
         <section className="post-area section">
           <div className="container">

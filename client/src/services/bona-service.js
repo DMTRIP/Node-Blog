@@ -21,7 +21,7 @@ export default  class BonaService {
  };
 
  getPost = async (id) => {
-   return await  axios.get(`/api/post/5d36a55e641f232c3456032e`);
+   return await axios.get(`/api/post/${id}`);
  };
 
  createUser = async (data) => {

@@ -46,6 +46,12 @@ exports.page = async num => Post.find({}, {}, { skip: num, limit: 10 });
 
 exports.myPostPage = async (num, id) => Post.find({ author: id }, {}, { skip: num, limit: 10 });
 
+exports.getSinglePost = async (id) => {
+  const post = await Post.findById(id);
+  post.views += 1;
+ return await post.save();
+};
+
 exports.recommended = async () => {
   const post = await Post.find();
   const recommended = [];

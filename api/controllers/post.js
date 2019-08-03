@@ -34,9 +34,13 @@ exports.post_recommended_get = async (req, res) => {
 };
 
 exports.post_getOne_get = async (req, res) => {
-  const post = await Post.findOneById(req.params.id);
-  if(!post) return res.status(404).json('post not found');
-  res.status(200).json(post);
+  const { id } = req.params;
+  try {
+    const post = await Post.getSinglePost(id);
+    res.status(200).json(post);
+  } catch (e) {
+    res.status(404).send();
+  }
 };
 
 exports.post_page_get = async (req, res) => {

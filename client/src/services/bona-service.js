@@ -57,4 +57,8 @@ export default  class BonaService {
    return await axios.delete(`/api/user/like/${userId}/${postId}`);
  };
 
+  deletePost = async (postId) => {
+    return axios.delete(`/api//post/${postId}`);
+  };
+
 };

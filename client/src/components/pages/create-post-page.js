@@ -52,9 +52,44 @@ class CreatePostPage extends Component{
 
   render() {
     const { status } = this.state;
+    const { editMode } = this.props;
     const massage = status === 'err' ? <UserMassage type="err" label='Something went wrong! Post has not been created'/> : null;
     const successMassage = status === 'success' ? <UserMassage type='success' label='Post has been created successfully!!!' /> : null;
     const infoMassage = status === 'info' ? <UserMassage type='info' label='Come on post is too short and fill title too' /> : null;
+    console.log(this.props);
+    if(editMode) {
+      return (
+        <Fragment>
+
+          <div className="container mb-5">
+            <div className="form-group d-flex flex-column">
+
+              <div className='mb-3'>
+                <label className='nice-text '>Your title</label>
+                <input type="text" className="form-control" placeholder="Title"
+                       onChange={(e) => this.onTitleChange(e.target.value)}/>
+              </div>
+
+              <div>
+                <label className='nice-text '>Preview</label> <br/>
+                <input onChange={(e) => this.onFileChange(e.target.files[0])} type="file"/>
+              </div>
+
+            </div>
+            {massage}
+            {successMassage}
+            {infoMassage}
+
+            <Ckeditor ckeditorOnChage={this.ckeditorOnChange}
+                      createPostHandler={this.createPostHandler}/>
+
+          </div>
+
+        </Fragment>
+      )
+    };
+
+
     return (
       <Fragment>
         <Header />
@@ -76,6 +111,7 @@ class CreatePostPage extends Component{
             {massage}
             {successMassage}
             {infoMassage}
+
             <Ckeditor ckeditorOnChage={this.ckeditorOnChange}
                       createPostHandler={this.createPostHandler}/>
 

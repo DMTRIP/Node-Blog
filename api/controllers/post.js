@@ -64,6 +64,12 @@ exports.post_myPost_page_get = async (req, res) => {
   }
 };
 
+exports.post_delete = async (req, res) => {
+  const { postId } = req.params;
+  const post = await Post.delete(postId);
+  res.status(200).send();
+};
+
 // USER
 
 exports.get_user_get = async (req, res) => {

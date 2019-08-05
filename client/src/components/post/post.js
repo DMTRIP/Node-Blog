@@ -8,6 +8,7 @@ import LoadMoreBtn from '../load-more-btn';
 import Spinner from '../spinner';
 import PostItem from '../post-item';
 import BonaService from '../../services/bona-service';
+import CreatePostPage from "../pages/create-post-page";
 const bonaService = new BonaService();
 
 
@@ -17,6 +18,7 @@ class Post extends Component {
     postData: null,
     pageNum: 0,
     like: false,
+    edit: false,
     err: false
   };
 
@@ -66,6 +68,27 @@ class Post extends Component {
     }
 
   };
+
+onDelete = async (id) => {
+  this.setState(({ postData }) => {
+    const idx = postData.findIndex(e => e.id === id);
+    const oldArr = [...postData];
+
+    const before = oldArr.splice(0, idx);
+    const after = oldArr.splice(idx + 1);
+
+    const newArr = [...before, ...after];
+
+    return {
+      postData: newArr
+    }
+  });
+  bonaService.deletePost(id);
+};
+
+onEdit = (id) => {
+  this.setState({ edit: id });
+};
 
 onLike = async (id) => {
   this.setState(({ postData })  => {
@@ -121,16 +144,20 @@ singlePostRoute = (id) => {
   };
 
   render() {
-    const { postData, pageNum, err } = this.state;
+    const { postData, pageNum, edit, err } = this.state;
 
-    const { loadBtn } = this.props;
+    const { loadBtn, ownPost } = this.props;
 
     if(!postData) return <Spinner />;
+
 
     const posts = postData.map(e  => {
       return(  <PostItem postData={e}
                          singlePostRoute={this.singlePostRoute}
-                         onLike={this.onLike} />)
+                         onLike={this.onLike}
+                         ownPost={ownPost}
+                         onDelete={this.onDelete}
+                         onEdit={this.onEdit}/>)
     });
 
     const msg  = err ? <ErrorHandler /> : null;

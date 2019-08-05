@@ -45,6 +45,8 @@ router.get('/post/page/:num', postController.post_page_get);
 
 router.get('/user/:id/post/page/:num', postController.post_myPost_page_get);
 
+router.delete('/post/:postId', postController.post_delete);
+
 // user
 router.get('/user/:id', postController.get_user_get);
 

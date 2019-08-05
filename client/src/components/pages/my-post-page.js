@@ -5,12 +5,15 @@ import Post from '../post';
 import Footer from '../footer';
 import BonaService from '../../services/bona-service';
 
-const MyPost = () => {
+const MyPost = ({ history }) => {
   const bonaService = new BonaService();
   return (
     <Fragment>
       <Header />
-            <Post getPost={bonaService.myPostPage} loadBtn={true}/>
+            <Post getPost={bonaService.myPostPage}
+                  loadBtn={true}
+                  ownPost={true}
+                  history={history}/>
       <Footer />
     </Fragment>
   )

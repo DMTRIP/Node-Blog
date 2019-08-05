@@ -1,7 +1,9 @@
 import React from 'react';
 
+import './post-item.css'
+
 const PostItem = (props) => {
-  const { postData, singlePostRoute, onLike } = props;
+  const { postData, singlePostRoute, onLike, ownPost, onDelete, onEdit  } = props;
   const { data, like } = postData;
 
   let classLike = '';
@@ -11,9 +13,24 @@ const PostItem = (props) => {
     classLike = 'like';
   };
 
+  let btn = null;
+
+  if(ownPost) {
+    btn = (
+      <div className='edit-btns'>
+        <span onClick={() => onEdit(data._id)} className='edit-btn'><i className="far fa-edit"></i></span>
+        <span onClick={() => onDelete(data._id)}><i className="far fa-trash-alt"></i></span>
+      </div>
+    );
+  }
+
   return (
     <div key={data._id} className="col-lg-4 col-md-6">
+
       <div className="card h-100">
+        {btn}
+
+
         <div className="single-post post-style-1">
 
           <div onClick={() => singlePostRoute(data._id)} className="blog-image"><img src={data.preview} alt="Blog Image" /></div>

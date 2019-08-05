@@ -12,7 +12,7 @@ function randomInteger(min, max) {
   return rand;
 }
 
-exports.all = async () => await Post.find().exec();
+exports.all = async () => await Post.find().populate('likes');
 
 exports.findOneById = async id => await Post.findById(id);
 
@@ -40,16 +40,16 @@ exports.update = (id, update) => Post.updateOne({ _id: ObjectId(id) }, update);
 
 exports.delete = id => Post.remove({ _id: ObjectId(id) }).exec();
 
-exports.myPost = async id => await Post.find({ author: id });
+exports.myPost = async id => await Post.find({ author: id }).populate('likes');
 
-exports.page = async num => Post.find({}, {}, { skip: num, limit: 10 });
+exports.page = async num => Post.find({}, {}, { skip: num, limit: 10 }).populate('likes');
 
-exports.myPostPage = async (num, id) => Post.find({ author: id }, {}, { skip: num, limit: 10 });
+exports.myPostPage = async (num, id) => Post.find({ author: id }, {}, { skip: num, limit: 10 }).populate('likes');
 
 exports.getSinglePost = async (id) => {
   const post = await Post.findById(id);
   post.views += 1;
- return await post.save();
+  return await post.save();
 };
 
 exports.recommended = async () => {
@@ -62,3 +62,7 @@ exports.recommended = async () => {
 
   return recommended;
 };
+
+exports.postWithLikePopulate = async () => await Post.find().populate('likes');
+
+

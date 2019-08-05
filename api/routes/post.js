@@ -57,6 +57,15 @@ router.post('/login', authController.user_login_post);
 router.post('/sign-up', authController.user_signUp_post);
 
 
+
+// Likes
+
+router.post('/post/like/:authorId/:postId', postController.setLikeToPost);
+
+router.get('/test', postController.postWithLikePopulate);
+
+router.delete('/user/like/:authorId/:postId', postController.deleteLike);
+
 // auth
 
 router.post('/re-captcha', authController.re_captcha_post);

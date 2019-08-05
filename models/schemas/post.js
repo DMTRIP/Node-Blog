@@ -16,7 +16,7 @@ const postSchema = Schema({
   preview: { type: String, default: '/uploads/default-images/postdefault.jpeg' },
 
   comments: [{ type: Schema.Types.ObjectId, ref: 'Comment' }],
-  likes: [{ type: Schema.Types.ObjectId, ref: 'Likes' }],
+  likes: [{ type: Schema.Types.ObjectId, ref: 'Like' }],
   views: { type: Number, default: 0 },
 
   created: { type: String, default: parse.date() },

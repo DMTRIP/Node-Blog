@@ -49,5 +49,12 @@ export default  class BonaService {
    return await axios.post(`/api/user/${userId}/post/create`,data);
  };
 
+ addLikeToPost = async (postId) => {
+   return await axios.post(`/api/post/like/${userId}/${postId}`);
+ };
+
+ deleteLikeFromPost = async (postId) => {
+   return await axios.delete(`/api/user/like/${userId}/${postId}`);
+ };
 
 };

@@ -38,3 +38,12 @@
 --------------------------------- */
 
 .post-style-1 .blog-image{ max-height: 200px; overflow: hidden; }
+
+.like {
+    color: #D8000C;
+}
+
+.like-span {
+    width: 100%;
+    line-height: 45px;
+}

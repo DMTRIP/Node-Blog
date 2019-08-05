@@ -6,109 +6,60 @@ import './post.css'
 import ErrorHandler from "../error-handler";
 import LoadMoreBtn from '../load-more-btn';
 import Spinner from '../spinner';
+import PostItem from '../post-item';
+import BonaService from '../../services/bona-service';
+const bonaService = new BonaService();
 
 
 class Post extends Component {
 
   state = {
-    posts: null,
+    postData: null,
     pageNum: 0,
+    like: false,
     err: false
   };
 
   componentDidMount() {
     const { pageNum } = this.state;
-
-    if(pageNum) {
-      this.InitPage(pageNum)
-    } else {
-      this.Init();
-    }
+      this.init(pageNum);
   }
 
-  async Init () {
+  async init (pageNum) {
     const { getPost } = this.props;
-    try {
-      const { data } = await getPost();
-      const posts = data.map((e) => {
-        const singlePostRoute = (id) => {
-          this.props.history.push(`/single-post/${id}`);
-        };
-        return (
-          <div className="col-lg-4 col-md-6">
-            <div className="card h-100">
-              <div className="single-post post-style-1">
+    const { postData } = this.state;
 
-                <div onClick={() => singlePostRoute(e._id)} className="blog-image"><img src={e.preview} alt="Blog Image" /></div>
-
-                <a className="avatar" href="#"><img src={e.authorAvatar} alt="Profile Image" /></a>
-
-                <div className="blog-info">
-
-                  <h4 onClick={() => singlePostRoute(e._id)}  className="title"><a href="#"><b>{e.title}</b></a></h4>
-
-                  <ul className="post-footer">
-                    <li><a href="#"><i className="fas fa-heart"></i>{e.likes}</a></li>
-                    <li><a href="#"><i className="fas fa-comment"></i>{e.comments}</a></li>
-                    <li><a href="#"><i className="fas fa-eye"></i>{e.views}</a></li>
-                  </ul>
-
-                </div>
-              </div>
-            </div>
-          </div>
-        )
-      });
-      this.setState({ posts });
-    } catch (e) {
-      this.setState({ err: true })
-    }
-
-  };
-
-  InitPage = async (pageNum) => {
-    const { getPost } = this.props;
     try {
       const { data } = await getPost(pageNum);
-      console.log(data);
-      const post = data.map((e) => {
-        const singlePostRoute = (id) => {
-          this.props.history.push(`/single-post/${id}`);
-        };
-        return (
-          <div className="col-lg-4 col-md-6">
-            <div className="card h-100">
-              <div className="single-post post-style-1">
-
-                <div onClick={() => singlePostRoute(e._id)} className="blog-image"><img src={e.preview} alt="Blog Image" /></div>
-
-                <a className="avatar" href="#"><img src={e.authorAvatar} alt="Profile Image" /></a>
-
-                <div className="blog-info">
-
-                  <h4 onClick={() => singlePostRoute(e._id)}  className="title"><a href="#"><b>{e.title}</b></a></h4>
-
-                  <ul className="post-footer">
-                    <li><a href="#"><i className="fas fa-heart"></i>{e.likes}</a></li>
-                    <li><a href="#"><i className="fas fa-comment"></i>{e.comments}</a></li>
-                    <li><a href="#"><i className="fas fa-eye"></i>{e.views}</a></li>
-                  </ul>
-
-                </div>
-              </div>
-            </div>
-          </div>
-        )
-      });
-      this.setState(({ posts }) => {
-        if(!posts) return { posts: post };
-        const newArr = [
-          ...posts,
-          ...post
-        ];
-        return {posts: newArr}
+      const postDataApi = data.map((e) => {
+        let isLike = false;
+        console.log(e.likes.length);
+        if(e.likes.length > 0) {
+          console.log(1);
+          const id = localStorage.getItem('id');
+          e.likes.map(e => {
+            if(e.author === id) isLike = true;
+          });
+        }
+        return {
+          id: e._id,
+          like: isLike,
+          data: e,
+        }
       });
 
+      if(postData) {
+        this.setState(({ postData }) => {
+          const oldArr = [...postData];
+          const newArr = [...postData, ...postDataApi];
+
+          return {
+            postData: newArr
+          };
+        });
+      } else {
+        this.setState({ postData: postDataApi });
+      }
 
     } catch (e) {
       this.setState({ err: true })
@@ -116,7 +67,47 @@ class Post extends Component {
 
   };
 
+onLike = async (id) => {
+  this.setState(({ postData })  => {
+    const idx = postData.findIndex(e => e.id === id);
+    console.log(idx);
+    const oldPost = postData[idx];
 
+    const newPost = {...oldPost, like: !oldPost.like};
+
+    if(oldPost.like) {
+      newPost.data.likes.pop();
+    } else {
+      newPost.data.likes.push(1);
+    }
+    const newArr = [
+      ...postData.slice(0, idx),
+      newPost,
+      ...postData.slice(idx + 1)
+    ];
+
+    return {
+      postData: newArr
+    }
+
+  });
+
+  const { postData } = this.state;
+
+  const idx = postData.findIndex(e => e.id === id);
+  const oldPost = postData[idx];
+
+  if(oldPost.like) {
+        await bonaService.deleteLikeFromPost(oldPost.id);
+    } else {
+      await bonaService.addLikeToPost(oldPost.id);
+    }
+  console.log(this.state.postData);
+};
+
+singlePostRoute = (id) => {
+    this.props.history.push(`/single-post/${id}`);
+  };
 
   nextPage = (pageNum) => {
     this.setState(({ pageNum }) => {
@@ -126,25 +117,30 @@ class Post extends Component {
         pageNum: newNum
       }
     });
-    this.InitPage(pageNum);
+    this.init(pageNum);
   };
 
-
-
   render() {
-    const { posts, pageNum, err } = this.state;
+    const { postData, pageNum, err } = this.state;
 
     const { loadBtn } = this.props;
 
+    if(!postData) return <Spinner />;
+
+    const posts = postData.map(e  => {
+      return(  <PostItem postData={e}
+                         singlePostRoute={this.singlePostRoute}
+                         onLike={this.onLike} />)
+    });
+
     const msg  = err ? <ErrorHandler /> : null;
     const loadMore = loadBtn ? <LoadMoreBtn nextPage={this.nextPage} pageNum={pageNum} /> : null;
-    const spinner = posts ? null : <Spinner />;
+
     return (
       <Fragment>
         <section className="blog-area section">
           <div className="container">
             <div className="row">
-              {spinner}
               { posts }
               { msg }
               {loadMore}

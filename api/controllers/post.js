@@ -1,5 +1,6 @@
 const Post = require('../../models/post');
 const User = require('../../models/user');
+const Like = require('../../models/like');
 
 exports.post_all_get = async (req, res) => {
   const post = await Post.all();
@@ -72,4 +73,23 @@ exports.get_user_get = async (req, res) => {
   } catch (e) {
     res.status(404).json({ msg: 'user not found' });
   }
+};
+
+// LIKES
+
+exports.setLikeToPost = async (req, res) => {
+  const { authorId, postId } = req.params;
+  const like = await Like.setLikeToPost(authorId, postId);
+  res.status(200).json(like);
+};
+
+exports.deleteLike = async (req, res) => {
+  const { authorId, postId } = req.params;
+ const like = await Like.deleteLikeFromPost(authorId, postId);
+ res.status(200).json(like);
+};
+
+exports.postWithLikePopulate = async (req, res) => {
+  const post = await Post.postWithLikePopulate();
+  res.send(post);
 };

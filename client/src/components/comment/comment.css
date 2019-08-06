@@ -17,6 +17,9 @@
 
 .comment-form .submit-btn:hover{ background: none; }
 
+.name {
+    margin-right: .5rem;
+}
 
 
 /* COMMENTS */

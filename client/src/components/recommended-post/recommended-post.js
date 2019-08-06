@@ -1,10 +1,8 @@
 import React from 'react';
 
-import Post from '../post';
-import BonaService from '../../services/bona-service';
 import './recommended-post.css'
+import { RecommendedPostList } from "../post-commponents";
 
-const bonaService = new BonaService();
 
 
 const RecommendedPost = () => {
@@ -13,7 +11,6 @@ const RecommendedPost = () => {
       <div className="container">
         <div className="row">
 
-          <Post getPost={bonaService.getRecommendedPost} />
 
         </div>
       </div>

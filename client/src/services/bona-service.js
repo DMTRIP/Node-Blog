@@ -12,6 +12,10 @@ export default  class BonaService {
    return await axios.get(`/api/user/${userId}/post`);
  };
 
+ getDate = async () => {
+   return await axios.get('/api/date');
+ };
+
  getRecommendedPost = async () => {
    return await axios.get('/api/user/post/recommended');
  };
@@ -58,7 +62,15 @@ export default  class BonaService {
  };
 
   deletePost = async (postId) => {
-    return axios.delete(`/api//post/${postId}`);
+    return axios.delete(`/api/post/${postId}`);
+  };
+
+  getCommentPage = async (postId, num) => {
+    return axios.get(`/api/post/${postId}/comment/page/${num}`)
+  };
+
+  addComment = async (postId, massage) => {
+    return await axios.post(`/api/post/${postId}/${userId}/comment/create`, {massage});
   };
 
 };

@@ -1,134 +1,170 @@
-import React  from 'react';
+import React, { Component }  from 'react';
+import Spinner from "../spinner";
+
+import BonaService from '../../services/bona-service';
 
 import './comment.css'
+const bonaService = new BonaService();
 
-const Comment = () => {
-  return (
-    <section className="comment-section">
-      <div className="container">
-        <h4><b>POST COMMENT</b></h4>
-        <div className="row">
+export default class Comment extends Component{
 
-          <div className="col-lg-8 col-md-12">
-            <div className="comment-form">
-              <form method="post">
-                <div className="row">
+  state = {
+    pageData: null,
+    pageNum: 0,
+    massage: '',
+    err: false,
+  };
 
-                  <div className="col-sm-6">
-                    <input type="text" aria-required="true" name="contact-form-name" className="form-control"
-                           placeholder="Enter your name" aria-invalid="true" required />
-                  </div>
-                  <div className="col-sm-6">
-                    <input type="email" aria-required="true" name="contact-form-email" className="form-control"
-                           placeholder="Enter your email" aria-invalid="true" required />
-                  </div>
+   componentDidMount() {
+     const { pageNum } = this.state;
+      this.init(pageNum);
+   }
 
-                  <div className="col-sm-12">
-									<textarea name="contact-form-message" rows="2" className="text-area-messge form-control"
-                            placeholder="Enter your comment" aria-required="true" aria-invalid="false"> </textarea>
-                  </div>
-                  <div className="col-sm-12">
-                    <button className="submit-btn" type="submit" id="form-submit"><b>POST COMMENT</b></button>
-                  </div>
+  async init (pageNum) {
+    const { postId } = this.props;
+    const { pageData } = this.state;
+    try {
+      const { data } = await bonaService.getCommentPage(postId, pageNum);
+      console.log(data);
 
-                </div>
-              </form>
+      if(pageData) {
+        this.setState(({ pageData }) => {
+          const oldArr = [...pageData];
+          const newArr = [...pageData, ...data];
+
+          return {
+            pageData: newArr
+          };
+        });
+      } else {
+        this.setState({ pageData: data });
+      }
+
+    } catch (e) {
+      this.setState({ err: true })
+    }
+
+  };
+
+  nextPage = (pageNum) => {
+
+    this.setState(({ pageNum }) => {
+      let newNum = pageNum;
+      newNum++;
+      return {
+        pageNum: newNum
+      }
+    });
+    console.log(this.state.pageNum + 1);
+    this.init(this.state.pageNum + 1);
+  };
+
+  addComment = async (e) => {
+    e.preventDefault();
+    const { massage } = this.state;
+    if(massage.length === 0) return;
+
+    const {data: { name, avatar }} = await bonaService.getUser();
+    const { data: { date }} = await bonaService.getDate();
+
+    const comment = {
+      authorName: name,
+      authorAvatar: avatar,
+      created: date,
+      massage,
+    };
+
+    this.setState(({ pageData }) => {
+      const newArr = [ comment, ...pageData];
+      console.log(newArr);
+      return {
+        pageData: newArr
+      }
+    });
+
+    const { postId } = this.props;
+    bonaService.addComment(postId, massage);
+
+  };
+
+  onChange = (e) => {
+    this.setState({ massage: e.target.value });
+  };
+
+  comment = (data) => {
+    return (
+      <div className="commnets-area">
+
+        <div className="comment">
+
+          <div className="post-info">
+
+            <div className="left-area">
+              <a className="avatar" href="#"><img src={data.authorAvatar} alt="Profile Image" /></a>
             </div>
 
-            <h4><b>COMMENTS(12)</b></h4>
-
-            <div className="commnets-area">
-
-              <div className="comment">
-
-                <div className="post-info">
-
-                  <div className="left-area">
-                    <a className="avatar" href="#"><img src="images/avatar-1-120x120.jpg" alt="Profile Image" /></a>
-                  </div>
-
-                  <div className="middle-area">
-                    <a className="name" href="#"><b>Katy Liu</b></a>
-                    <h6 className="date">on Sep 29, 2017 at 9:48 am</h6>
-                  </div>
-
-                  <div className="right-area">
-                    <h5 className="reply-btn"><a href="#"><b>REPLY</b></a></h5>
-                  </div>
-
-                </div>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                  ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur
-                  Ut enim ad minim veniam</p>
-
-              </div>
-
-              <div className="comment">
-                <h5 className="reply-for">Reply for <a href="#"><b>Katy Lui</b></a></h5>
-
-                <div className="post-info">
-
-                  <div className="left-area">
-                    <a className="avatar" href="#"><img src="images/avatar-1-120x120.jpg" alt="Profile Image" /></a>
-                  </div>
-
-                  <div className="middle-area">
-                    <a className="name" href="#"><b>Katy Liu</b></a>
-                    <h6 className="date">on Sep 29, 2017 at 9:48 am</h6>
-                  </div>
-
-                  <div className="right-area">
-                    <h5 className="reply-btn"><a href="#"><b>REPLY</b></a></h5>
-                  </div>
-
-                </div>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                  ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur
-                  Ut enim ad minim veniam</p>
-
-              </div>
-
+            <div className="middle-area">
+              <a className="name" href="#"><b>{data.authorName}</b></a>
+              <h6 className="date">{data.created}</h6>
             </div>
 
-            <div className="commnets-area ">
-
-              <div className="comment">
-
-                <div className="post-info">
-
-                  <div className="left-area">
-                    <a className="avatar" href="#"><img src="images/avatar-1-120x120.jpg" alt="Profile Image" /></a>
-                  </div>
-
-                  <div className="middle-area">
-                    <a className="name" href="#"><b>Katy Liu</b></a>
-                    <h6 className="date">on Sep 29, 2017 at 9:48 am</h6>
-                  </div>
-
-                  <div className="right-area">
-                    <h5 className="reply-btn"><a href="#"><b>REPLY</b></a></h5>
-                  </div>
-
-                </div>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                  ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur
-                  Ut enim ad minim veniam</p>
-
-              </div>
-
+            <div className="right-area">
+              <h5 className="reply-btn"><a href="#"><b>REPLY</b></a></h5>
             </div>
-
-            <a className="more-comment-btn" href="#"><b>VIEW MORE COMMENTS</b></a>
 
           </div>
 
+          <p>{data.massage}</p>
+
         </div>
+
       </div>
-    </section>
-  )
+    )
+  };
+
+  render() {
+      const { pageData, err } = this.state;
+
+    if(!pageData) return <Spinner />;
+
+    const comment = pageData.map(e => this.comment(e));
+
+    return (
+      <section className="comment-section">
+        <div className="container">
+          <h4><b>POST COMMENT</b></h4>
+          <div className="row">
+
+            <div className="col-lg-8 col-md-12">
+              <div className="comment-form">
+                <form method="post" onSubmit={(e) => this.addComment(e)}>
+                  <div className="row">
+
+                    <div className="col-sm-12">
+									<textarea
+                    onChange={(e) => this.onChange(e)}
+                    name="contact-form-message" rows="2" className="text-area-messge form-control"
+                    placeholder="Enter your comment" aria-required="true" aria-invalid="false"> </textarea>
+                    </div>
+                    <div className="col-sm-12">
+                      <button className="submit-btn" type="submit" id="form-submit"><b>POST COMMENT</b></button>
+                    </div>
+
+                  </div>
+                </form>
+              </div>
+
+              <h4><b>COMMENTS({pageData.length})</b></h4>
+
+              {comment}
+              <p className="more-comment-btn" onClick={this.nextPage} ><b>VIEW MORE COMMENTS</b></p>
+
+            </div>
+
+          </div>
+        </div>
+      </section>
+    )
+  }
 };
 
-export default Comment;

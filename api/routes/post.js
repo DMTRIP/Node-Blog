@@ -72,5 +72,15 @@ router.delete('/user/like/:authorId/:postId', postController.deleteLike);
 
 router.post('/re-captcha', authController.re_captcha_post);
 
+// Comment
+
+router.get('/post/:postId/comment/page/:num', postController.commentPageWithAuthor);
+
+router.post('/post/:postId/:authorId/comment/create', postController.addCommentToPost);
+
+// Other
+
+router.get('/date', postController.getDate);
 
 module.exports = router;
+

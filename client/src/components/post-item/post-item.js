@@ -7,9 +7,7 @@ const PostItem = (props) => {
   const { data, like } = postData;
 
   let classLike = '';
-  console.log(like);
   if(like) {
-    console.log(2);
     classLike = 'like';
   };
 

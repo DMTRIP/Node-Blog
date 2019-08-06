@@ -10,7 +10,7 @@ const { ObjectId } = mongoose.Types;
 // get cursor on all users
 exports.all = async () => await User.find().exec();
 
-exports.findOneById = async id => await User.findById(id);
+exports.findOneById = async id => await User.findById(id).select('-password');
 
 exports.create = async (data) => {
   const { name, email, password } = data;

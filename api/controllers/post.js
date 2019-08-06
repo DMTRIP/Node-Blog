@@ -1,6 +1,9 @@
 const Post = require('../../models/post');
 const User = require('../../models/user');
 const Like = require('../../models/like');
+const Comment = require('../../models/comment');
+
+const parse = require('../../parse');
 
 exports.post_all_get = async (req, res) => {
   const post = await Post.all();
@@ -73,8 +76,10 @@ exports.post_delete = async (req, res) => {
 // USER
 
 exports.get_user_get = async (req, res) => {
+  const { id } = req.params;
   try {
-    const user = await User.findOneById('5d2ed8ae4bd84bfe49e17985');
+    const user = await User.findOneById(id);
+    console.log(user);
     res.status(200).json(user);
   } catch (e) {
     res.status(404).json({ msg: 'user not found' });
@@ -91,11 +96,47 @@ exports.setLikeToPost = async (req, res) => {
 
 exports.deleteLike = async (req, res) => {
   const { authorId, postId } = req.params;
- const like = await Like.deleteLikeFromPost(authorId, postId);
- res.status(200).json(like);
+  const like = await Like.deleteLikeFromPost(authorId, postId);
+  res.status(200).json(like);
 };
 
 exports.postWithLikePopulate = async (req, res) => {
   const post = await Post.postWithLikePopulate();
   res.send(post);
+};
+
+// Comment
+
+exports.commentPageWithAuthor = async (req, res) => {
+  const { postId, num } = req.params;
+  try {
+    const page = await Comment.pageWithAuthor(postId, num * 10);
+    res.status(200).json(page.reverse());
+  } catch (e) {
+    res.status(404).send();
+  }
+};
+
+exports.addCommentToPost = async (req, res) => {
+  const { postId, authorId } = req.params;
+  const { massage } = req.body;
+
+  const user = await User.findOneById(authorId);
+
+  try {
+    const comment = await Comment.createToPost(postId, authorId, massage);
+    user.comments.push(comment.id);
+    await user.save();
+
+    res.status(201).send(comment);
+  } catch (e) {
+    res.status(500).send();
+  }
+};
+
+
+// Other
+
+exports.getDate = (req, res) => {
+  res.status(200).json({ date: parse.date() });
 };

@@ -53,7 +53,7 @@ export default class SinglePostPage extends Component {
         </section>
 
         <RecommendedPost />
-        <Comment />
+        <Comment postId={this.props.postId}/>
         <Footer />
       </Fragment>
     );

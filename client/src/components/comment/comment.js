@@ -10,6 +10,7 @@ export default class Comment extends Component{
 
   state = {
     pageData: null,
+    commentAmt: 0,
     pageNum: 0,
     massage: '',
     err: false,
@@ -25,19 +26,21 @@ export default class Comment extends Component{
     const { pageData } = this.state;
     try {
       const { data } = await bonaService.getCommentPage(postId, pageNum);
-      console.log(data);
+      const comments = data.page;
 
       if(pageData) {
         this.setState(({ pageData }) => {
           const oldArr = [...pageData];
-          const newArr = [...pageData, ...data];
+          const newArr = [...pageData, ...comments];
 
           return {
             pageData: newArr
           };
         });
       } else {
-        this.setState({ pageData: data });
+        this.setState({ pageData: comments });
+        this.setState({ commentAmt: data.commentAmt });
+
       }
 
     } catch (e) {
@@ -123,10 +126,9 @@ export default class Comment extends Component{
   };
 
   render() {
-      const { pageData, err } = this.state;
+      const { pageData, err, commentAmt } = this.state;
 
     if(!pageData) return <Spinner />;
-
     const comment = pageData.map(e => this.comment(e));
 
     return (
@@ -154,7 +156,7 @@ export default class Comment extends Component{
                 </form>
               </div>
 
-              <h4><b>COMMENTS({pageData.length})</b></h4>
+              <h4><b>COMMENTS({commentAmt})</b></h4>
 
               {comment}
               <p className="more-comment-btn" onClick={this.nextPage} ><b>VIEW MORE COMMENTS</b></p>

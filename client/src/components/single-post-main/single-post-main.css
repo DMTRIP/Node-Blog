@@ -107,3 +107,6 @@
 
 .single-post .post-footer i{ display: inline-block; margin-right: 10px; opacity: .6; font-size: 1.1em; }
 
+header  {
+    margin-bottom: 0 !important;
+}

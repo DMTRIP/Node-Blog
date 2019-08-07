@@ -31,11 +31,15 @@ exports.createToPost = async (postId, authorId, massage) => {
     authorName: user.name,
   };
 
+  const post = await Post.findById(postId);
+
   // create comment
   const comment = new Comment(commentData);
+  post.comments.push(comment.id);
+  post.save();
   return comment.save();
 };
 
 exports.pageWithAuthor = async (postId, num) => {
-  return await Comment.find({ postId }, {}, { skip: num, limit: 10 }).populate('users');
+  return await Comment.find({ postId }).populate('users');
 };

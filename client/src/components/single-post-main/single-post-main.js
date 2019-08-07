@@ -4,9 +4,8 @@ import PostInfo from '../post-info';
 import './single-post-main.css';
 
 const SinglePostMain  = ({ post })  =>  {
-  const { title, comments, likes, views } = post;
+  const { title, comments, likes, views, body } = post;
   console.log(post);
-
   return (
       <Fragment>
         <div className="col-lg-8 col-md-12 no-right-padding">
@@ -16,10 +15,11 @@ const SinglePostMain  = ({ post })  =>  {
             <div className="blog-post-inner">
               <div className="blog-post-inner">
 
-                <PostInfo />
+                <PostInfo post={post} />
 
                 <h3 className="title"><a href="#"><b>{title}</b></a></h3>
 
+                <div className='para' dangerouslySetInnerHTML={{ __html: body }} />
 
                 <ul className="tags">
                   <li><a href="#">Mnual</a></li>
@@ -31,9 +31,9 @@ const SinglePostMain  = ({ post })  =>  {
 
               <div className="post-icons-area">
                 <ul className="post-icons">
-                  <li><a href="#"><i className="ion-heart"></i>{likes.length}</a></li>
-                  <li><a href="#"><i className="ion-chatbubble"></i>{comments.length}</a></li>
-                  <li><a href="#"><i className="ion-eye"></i>{views.length}</a></li>
+                  <li><a href="#"><i className="fas fa-heart"></i>{likes.length}</a></li>
+                  <li><a href="#"><i className="fas fa-comment"></i>{comments.length}</a></li>
+                  <li><a href="#"><i className="fas fa-eye"></i>{views}</a></li>
                 </ul>
 
                 <ul className="icons">
@@ -44,7 +44,7 @@ const SinglePostMain  = ({ post })  =>  {
                 </ul>
               </div>
 
-              <PostInfo />
+              <PostInfo post={post}  />
 
             </div>
           </div>

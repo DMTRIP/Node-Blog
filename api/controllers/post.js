@@ -110,8 +110,17 @@ exports.postWithLikePopulate = async (req, res) => {
 exports.commentPageWithAuthor = async (req, res) => {
   const { postId, num } = req.params;
   try {
-    const page = await Comment.pageWithAuthor(postId, num * 10);
-    res.status(200).json(page.reverse());
+    const post = await Comment.pageWithAuthor(postId);
+    post.reverse();
+
+    const page = [];
+    for (let i = num * 3; i < (num * 3) + 3; i++) {
+      if (post[i]) {
+        page.push(post[i]);
+      }
+    };
+
+    res.status(200).json({page, commentAmt: post.length });
   } catch (e) {
     res.status(404).send();
   }

@@ -73,4 +73,8 @@ export default  class BonaService {
     return await axios.post(`/api/post/${postId}/${userId}/comment/create`, {massage});
   };
 
+  getUserById = async (id) => {
+    return await axios.get(`/api/user/${id}`);
+  }
+
 };

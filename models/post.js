@@ -65,4 +65,9 @@ exports.recommended = async () => {
 
 exports.postWithLikePopulate = async () => await Post.find().populate('likes');
 
-
+exports.searchByTitle = async (term) => {
+  const regex = new RegExp(term, 'gi');
+  const result = await Post.find({ title: { $regex: regex, $options: 'gi' } });
+  console.log(result);
+  return result;
+};

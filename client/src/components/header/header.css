@@ -108,3 +108,6 @@ header{
     }
 }
 
+.add-list li {
+    z-index: 100;
+}

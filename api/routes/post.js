@@ -82,5 +82,9 @@ router.post('/post/:postId/:authorId/comment/create', postController.addCommentT
 
 router.get('/date', postController.getDate);
 
+// Search
+
+router.get('/search/:term', postController.liveSearch);
+
 module.exports = router;
 

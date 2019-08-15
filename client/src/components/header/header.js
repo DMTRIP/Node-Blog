@@ -17,7 +17,8 @@ const Header = () => {
           <li><a href="#">About</a></li>
           <li><a href="#">Contact</a></li>
           <li>Blog <i className="fas fa-angle-down"></i>
-            <ul>
+            <ul className='add-list'>
+              <li><Link to='/profile'>Profile</Link></li>
               <li><Link to='/my-post'>My post</Link><span>17 Posts</span></li>
               <li><Link to='/create-post'>Create post</Link> <span>23 Posts</span></li>
             </ul>

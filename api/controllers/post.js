@@ -149,3 +149,13 @@ exports.addCommentToPost = async (req, res) => {
 exports.getDate = (req, res) => {
   res.status(200).json({ date: parse.date() });
 };
+
+
+// Search
+
+exports.liveSearch =  async (req, res) => {
+  const { term } = req.params;
+  const result = await Post.searchByTitle(term);
+  res.send(result);
+};
+

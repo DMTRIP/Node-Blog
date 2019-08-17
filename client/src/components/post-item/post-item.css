@@ -1,0 +1,13 @@
+.edit-btns {
+    display: flex;
+    justify-content: flex-end;
+    font-size: 2rem;
+}
+
+.edit-btn {
+    margin-right: 1rem;
+}
+
+.edit-btns span:hover {
+    color: red;
+}

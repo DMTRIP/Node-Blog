@@ -5,7 +5,6 @@ import './single-post-main.css';
 
 const SinglePostMain  = ({ post })  =>  {
   const { title, comments, likes, views, body } = post;
-  console.log(post);
   return (
       <Fragment>
         <div className="col-lg-8 col-md-12 no-right-padding">
@@ -55,4 +54,4 @@ const SinglePostMain  = ({ post })  =>  {
 
 };
 
-      export default SinglePostMain;
+ export default SinglePostMain;

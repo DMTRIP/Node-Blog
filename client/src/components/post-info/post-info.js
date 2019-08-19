@@ -21,7 +21,6 @@ export default class PostInfo extends Component {
 
     try {
       const { data } = await bonaService.getUserById(author);
-      console.log(data);
       this.setState({ user: data });
       this.setState({ created });
     } catch (e) {

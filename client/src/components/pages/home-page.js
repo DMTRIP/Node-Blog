@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 
 import Header from '../header';
 import Footer from '../footer';
-import { PostPage} from "../post-commponents";
+import { PostPage } from "../post-commponents";
 
 const HomePage = () => {
   return (

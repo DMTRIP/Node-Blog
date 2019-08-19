@@ -1,10 +1,9 @@
-import React, {Fragment} from 'react';
+import React from 'react';
 
 import './header.css';
 
 import { Link } from 'react-router-dom';
 
-import logo from '../../images/logo.png';
 import SearchPanel from  '../search-panel';
 
 

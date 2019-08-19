@@ -26,7 +26,7 @@ export default class Login extends Component {
     loginFail: false
   };
 
-  onChange = (e, pattern, ivalidName) => {
+onChange = (e, pattern, ivalidName) => {
     console.log(pattern.test(e.target.value));
     if(pattern.test(e.target.value)) {
       this.setState({
@@ -45,8 +45,7 @@ export default class Login extends Component {
     };
   };
 
-
-   submit = async (e) => {
+submit = async (e) => {
      e.preventDefault();
      const { captcha, name, email, password } = this.state;
      const { view, history } = this.props;
@@ -80,14 +79,14 @@ export default class Login extends Component {
      }
    };
 
-  verifyCallback =  async (captcha) => {
+verifyCallback =  async (captcha) => {
     const res = await bonaService.captchaVereficate(captcha);
     if(res.status === 200) {
       this.setState({ captcha: true });
     }
   };
 
-  render() {
+render() {
     const { classLogin, disableOverlay, classDisable, label, view } = this.props;
     const { invalidName,  invalidEmail, invalidPassword,
             sighUpSuccess, sighUpFail, loginFail} = this.state;
